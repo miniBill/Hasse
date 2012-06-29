@@ -1,6 +1,6 @@
 using System;
 
-namespace Hasse.Groups{
+namespace Hasse.Groups.Generic{
 	public abstract class GroupElement<T> where T : class{
 		public abstract T Multiply(T other);
 

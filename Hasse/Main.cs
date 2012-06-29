@@ -5,12 +5,11 @@ using Hasse.Groups.Cyclic;
 namespace Hasse{
 	static class Program{
 		public static void Main(string[] args){
-			if(args.Length == 0){
+			if(args.Length < 2){
 				Console.Error.WriteLine("Ohnoes, needz moar argumentz!");
 				return;
 			}
-			var @group = new CyclicGroup(Convert.ToInt32(args[0]));
-			var prod = @group;
+			var @group = (new CyclicGroup(Convert.ToInt32(args[0]))).Power(Convert.ToInt32(args[1]));
 			var g2 = GeneratorFactory.Create(@group);
 			Console.WriteLine("digraph G { ");
 			var gen = from subgroup in g2.Generate()

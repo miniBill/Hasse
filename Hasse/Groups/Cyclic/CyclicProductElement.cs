@@ -1,4 +1,5 @@
 using System;
+using Hasse.Groups.Product;
 
 namespace Hasse.Groups.Cyclic{
 	public class CyclicProductElement : ProductElement<CyclicElement, CyclicElement>{

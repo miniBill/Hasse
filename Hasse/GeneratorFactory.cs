@@ -1,5 +1,5 @@
 using System;
-using Hasse.Groups;
+using Hasse.Groups.Generic;
 
 namespace Hasse{
 	public class GeneratorFactory{

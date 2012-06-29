@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Hasse.Groups;
+using Hasse.Groups.Generic;
 
 namespace Hasse{
 	public class Generator<T> where T : GroupElement<T>{

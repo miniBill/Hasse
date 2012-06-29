@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Hasse.Groups{
+namespace Hasse.Groups.Generic{
 	public class SubGroup<T> : IEnumerable<T> where T : GroupElement<T>{
 		private T[] elements;
 

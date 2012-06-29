@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Hasse.Groups.Generic;
 
 namespace Hasse.Groups.Cyclic{
 	public class CyclicSubGroup : SubGroup<CyclicElement>{
