@@ -19,16 +19,7 @@ namespace Hasse{
 					Generate(generated, single);
 				}
 			}
-			generated.Sort(new CountComparer());
 			return generated;
-		}
-
-		private class CountComparer : IComparer<SubGroup<T>>{
-			public int Compare(SubGroup<T> x, SubGroup<T> y){
-				if(x.Order > y.Order)
-					return 1;
-				return x.Order == y.Order ? 0 : -1;
-			}
 		}
 
 		public SubGroup<T> Generate(T gen){

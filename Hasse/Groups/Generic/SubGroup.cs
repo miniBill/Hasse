@@ -23,6 +23,13 @@ namespace Hasse.Groups{
 			return false;
 		}
 
+		public bool Contains(IEnumerable<T> check){
+			foreach(var el in check)
+				if(!Contains(el))
+					return false;
+			return true;
+		}
+
 		public IEnumerator<T> GetEnumerator(){
 			foreach(var el in elements)
 				yield return el;

@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -51,6 +52,8 @@
     <Compile Include="Groups\Product\ProductGroup.cs" />
     <Compile Include="Groups\Cyclic\CyclicProductElement.cs" />
     <Compile Include="Groups\Cyclic\CyclicSubGroup.cs" />
+    <Compile Include="Groups\Product\PowerGroup.cs" />
+    <Compile Include="Groups\Product\PowerElement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -10,6 +10,9 @@ namespace Hasse.Groups.Cyclic{
 			else
 				return base.ToString();
 		}
+
+		public override ProductElement<CyclicElement,CyclicElement> Multiply(ProductElement<CyclicElement,CyclicElement> other){
+			return new CyclicProductElement(Left * other.Left, Right * other.Right);
+		}
 	}
 }
-

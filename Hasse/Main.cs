@@ -1,28 +1,57 @@
 using System;
+using System.Linq;
 using Hasse.Groups.Cyclic;
 
 namespace Hasse{
 	static class Program{
 		public static void Main(string[] args){
-			CyclicElement a = new CyclicElement(3, 4);
-			Console.WriteLine(a);
-			CyclicElement b = new CyclicElement(1, 4);
-			Console.WriteLine(b);
-			CyclicElement test = a + b;
-			Console.WriteLine(test);
-			CyclicElement test2 = a * b;
-			Console.WriteLine(test2);
-
-			var group = new CyclicGroup(4);
-
-			var g = GeneratorFactory.Create(group);
-			foreach(var sub in g.Generate())
-				sub.Dump();
-
-			var prod = group * group;
-			var g2 = GeneratorFactory.Create(prod);
-			foreach(var sub in g2.Generate())
-				sub.Dump();
+			if(args.Length == 0){
+				Console.Error.WriteLine("Ohnoes, needz moar argumentz!");
+				return;
+			}
+			var @group = new CyclicGroup(Convert.ToInt32(args[0]));
+			var prod = @group;
+			var g2 = GeneratorFactory.Create(@group);
+			Console.WriteLine("digraph G { ");
+			var gen = from subgroup in g2.Generate()
+				      group subgroup by subgroup.Order into sizegroup
+					  orderby sizegroup.Key descending
+					  select sizegroup;
+			var genlist = gen.ToList();
+			Console.WriteLine("  {");
+			Console.WriteLine("    node [shape=plaintext];");
+			foreach(var size in genlist)
+				if(size.Key != 1)
+					Console.Write("\"{0} elementi\" -> ", size.Key);
+			Console.WriteLine(" \"1 elemento\"");
+			Console.WriteLine("  }");
+			foreach(var size in genlist){
+				Console.Write("  { rank = same; \"");
+				Console.Write(size.Key);
+				if(size.Key == 1)
+					Console.Write(" elemento\"");
+				else
+					Console.Write(" elementi\"");
+				int item = 0;
+				foreach(var sub in size)
+					Console.Write("; l{0}i{1}", size.Key, item++);
+				Console.WriteLine("; }");
+				if(size.Key > 1){
+					item = 0;
+					foreach(var sub in size){
+						foreach(var lower in genlist.Where(g => g.Key < size.Key)){
+							int lowitem = 0;
+							foreach(var low in lower){
+								if(sub.Contains(low))
+									Console.WriteLine("  l{0}i{1} -> l{2}i{3}", size.Key, item, lower.Key, lowitem);
+								lowitem++;
+							}
+						}
+						item++;
+					}
+				}
+			}
+			Console.WriteLine("}");
 		}
 	}
 }
