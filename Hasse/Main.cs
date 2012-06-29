@@ -18,9 +18,6 @@ namespace Hasse{
 					Console.Write("\"{0} elementi\" -> ", size.Key);
 			Console.WriteLine(" \"1 elemento\"");
 			Console.WriteLine("  }");
-			foreach(var size in genlist)
-				foreach(var sub in size)
-					Console.Write("\"{0}\"[label=<{1}>]", sub.ToString().GetHashCode(), sub.ToString());
 			foreach(var size in genlist){
 				Console.Write("  { rank = same; \"");
 				Console.Write(size.Key);
@@ -28,15 +25,24 @@ namespace Hasse{
 					Console.Write(" elemento\"");
 				else
 					Console.Write(" elementi\"");
+				int item = 1;
 				foreach(var sub in size)
-					Console.Write("; \"{0}\"", sub.ToString().GetHashCode());
+					Console.Write("; l{0}i{1}", size.Key, item++);
 				Console.WriteLine("; }");
-				if(size.Key > 1)
-					foreach(var sub in size)
-						foreach(var lower in genlist.Where(g => g.Key < size.Key))
-							foreach(var low in lower)
+				if(size.Key > 1){
+					item = 1;
+					foreach(var sub in size){
+						foreach(var lower in genlist.Where(g => g.Key < size.Key)){
+							int lowitem = 1;
+							foreach(var low in lower){
 								if(sub.Contains(low))
-									Console.WriteLine("  \"{0}\" -> \"{1}\"", sub.ToString().GetHashCode(), low.ToString().GetHashCode());
+									Console.WriteLine("  l{0}i{1} -> l{2}i{3}", size.Key, item, lower.Key, lowitem);
+								lowitem++;
+							}
+						}
+						item++;
+					}
+				}
 			}
 			Console.WriteLine("}");
 		}

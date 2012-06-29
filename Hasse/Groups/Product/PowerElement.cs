@@ -41,19 +41,16 @@ namespace Hasse.Groups.Product{
 			case 0:
 				return "{}";
 			case 1:
+				sb.Append(Elements[0]);
+				break;
+			default:
+				sb.Append('{');
+				sb.Append(Elements[0]);
 				for(int i = 1; i < Elements.Length; i++){
 					sb.Append(", ");
 					sb.Append(Elements[i]);
 				}
-				break;
-			default:
-				sb.Append("<TABLE>");
-				for(int i = 0; i < Elements.Length; i++){
-					sb.Append("<TR><TD>");
-					sb.Append(Elements[i]);
-					sb.Append("</TD></TR>");
-				}
-				sb.Append("</TABLE>");
+				sb.Append('}');
 				break;
 			}
 			return sb.ToString();
