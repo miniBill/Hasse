@@ -1,5 +1,5 @@
 using System;
-using Hasse.Groups;
+using Hasse.Groups.Cyclic;
 
 namespace Hasse{
 	static class Program{

@@ -1,6 +1,6 @@
 using System;
 
-namespace Hasse.Groups{
+namespace Hasse.Groups.Cyclic{
 	public class CyclicGroup : Group<CyclicElement>{
 		private int order;
 

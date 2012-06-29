@@ -50,6 +50,7 @@
     <Compile Include="Groups\Cyclic\CyclicProductGroup.cs" />
     <Compile Include="Groups\Product\ProductElement.cs" />
     <Compile Include="Groups\Product\ProductGroup.cs" />
+    <Compile Include="Groups\Cyclic\CyclicProductElement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

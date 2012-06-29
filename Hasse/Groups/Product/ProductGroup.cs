@@ -11,7 +11,11 @@ namespace Hasse.Groups{
 			elements = new ProductElement<U, V>[Order];
 			for(int i = 0; i < left.Order; i++)
 				for(int j = 0; j < right.Order; j++)
-					elements[i * right.Order + j] = new ProductElement<U,V>(left[i], right[j]);
+					elements[i * right.Order + j] = Multiply(left[i], right[j]);
+		}
+
+		protected virtual ProductElement<U,V> Multiply(U left, V right){
+			return new ProductElement<U,V>(left, right);
 		}
 
 		ProductElement<U,V>[] elements;

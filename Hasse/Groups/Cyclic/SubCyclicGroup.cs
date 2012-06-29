@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Hasse.Groups{
+namespace Hasse.Groups.Cyclic{
 	public class SubCyclicGroup : SubGroup<CyclicElement>{
 		public override void Dump(){
 			Console.Write('{');
