@@ -48,12 +48,12 @@ namespace Hasse{
 		}
 
 		public static IEnumerable<IGrouping<int,ISubGroup>> Generate(string[] args){
-			if(args.Length < 3){
+			if(args.Length < 2){
 				Console.Error.WriteLine("Ohnoes, needz moar argumentz!");
 				return null;
 			}
 			if(args[0] == "z" || args[0] == "Z"){
-				var @group = (new CyclicGroup(Convert.ToInt32(args[1]))).Power(Convert.ToInt32(args[2]));
+				var @group = (new CyclicGroup(Convert.ToInt32(args[1]))).Power(args.Length == 2 ? 1 : Convert.ToInt32(args[2]));
 				var g2 = GeneratorFactory.Create(@group);
 				Console.WriteLine("digraph G { ");
 				var gen = from subgroup in g2.Generate()
@@ -63,7 +63,7 @@ namespace Hasse{
 				return WrapperFactory.CreateWrapper(gen.ToList());
 			}
 			if(args[0] == "s" || args[0] == "S"){
-				var @group = (new SymmetricGroup(Convert.ToInt32(args[1]))).Power(Convert.ToInt32(args[2]));
+				var @group = (new SymmetricGroup(Convert.ToInt32(args[1]))).Power(args.Length == 2 ? 1 : Convert.ToInt32(args[2]));
 				var g2 = GeneratorFactory.Create(@group);
 				Console.WriteLine("digraph G { ");
 				var gen = from subgroup in g2.Generate()
