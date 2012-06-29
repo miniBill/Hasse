@@ -37,16 +37,25 @@ namespace Hasse.Groups.Product{
 
 		public override string ToString(){
 			StringBuilder sb = new StringBuilder();
-			if(Elements.Length > 1)
-				sb.Append('{');
-			if(Elements.Length > 0)
-			sb.Append(Elements[0]);
-			for(int i = 1; i < Elements.Length; i++){
-				sb.Append(", ");
-				sb.Append(Elements[i]);
+			switch(Elements.Length){
+			case 0:
+				return "{}";
+			case 1:
+				for(int i = 1; i < Elements.Length; i++){
+					sb.Append(", ");
+					sb.Append(Elements[i]);
+				}
+				break;
+			default:
+				sb.Append("<TABLE>");
+				for(int i = 0; i < Elements.Length; i++){
+					sb.Append("<TR><TD>");
+					sb.Append(Elements[i]);
+					sb.Append("</TD></TR>");
+				}
+				sb.Append("</TABLE>");
+				break;
 			}
-			if(Elements.Length > 1)
-				sb.Append('}');
 			return sb.ToString();
 		}
 	}

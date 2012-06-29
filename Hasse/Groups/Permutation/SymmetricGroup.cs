@@ -28,7 +28,6 @@ namespace Hasse.Groups.Permutation{
 				}
 				elements[i] = new SymmetricElement(curr);
 			}
-			Console.Error.WriteLine(ToString());
 		}
 
 		bool Contains(int[] arr, int maxindex, int value){

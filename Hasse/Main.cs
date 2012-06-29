@@ -18,6 +18,9 @@ namespace Hasse{
 					Console.Write("\"{0} elementi\" -> ", size.Key);
 			Console.WriteLine(" \"1 elemento\"");
 			Console.WriteLine("  }");
+			foreach(var size in genlist)
+				foreach(var sub in size)
+					Console.Write("\"{0}\"[label=<{1}>]", sub.ToString().GetHashCode(), sub.ToString());
 			foreach(var size in genlist){
 				Console.Write("  { rank = same; \"");
 				Console.Write(size.Key);
@@ -25,17 +28,15 @@ namespace Hasse{
 					Console.Write(" elemento\"");
 				else
 					Console.Write(" elementi\"");
-				foreach(var sub in size){
-					Console.Write("; \"{0}\"", sub.ToString());
-					Console.Error.WriteLine(sub.ToString());
-				}
+				foreach(var sub in size)
+					Console.Write("; \"{0}\"", sub.ToString().GetHashCode());
 				Console.WriteLine("; }");
 				if(size.Key > 1)
 					foreach(var sub in size)
 						foreach(var lower in genlist.Where(g => g.Key < size.Key))
 							foreach(var low in lower)
 								if(sub.Contains(low))
-									Console.WriteLine("  \"{0}\" -> \"{1}\"", sub.ToString(), low.ToString());
+									Console.WriteLine("  \"{0}\" -> \"{1}\"", sub.ToString().GetHashCode(), low.ToString().GetHashCode());
 			}
 			Console.WriteLine("}");
 		}
@@ -47,7 +48,6 @@ namespace Hasse{
 			}
 			if(args[0] == "z" || args[0] == "Z"){
 				var @group = (new CyclicGroup(Convert.ToInt32(args[1]))).Power(Convert.ToInt32(args[2]));
-				Console.Error.WriteLine(@group.ToString());
 				var g2 = GeneratorFactory.Create(@group);
 				Console.WriteLine("digraph G { ");
 				var gen = from subgroup in g2.Generate()
@@ -58,7 +58,6 @@ namespace Hasse{
 			}
 			if(args[0] == "s" || args[0] == "S"){
 				var @group = (new SymmetricGroup(Convert.ToInt32(args[1]))).Power(Convert.ToInt32(args[2]));
-				Console.Error.WriteLine(@group.ToString());
 				var g2 = GeneratorFactory.Create(@group);
 				Console.WriteLine("digraph G { ");
 				var gen = from subgroup in g2.Generate()
