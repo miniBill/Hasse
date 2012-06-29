@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
-namespace Hasse.Groups.Generic{
-	public class SubGroup<T> : IEnumerable<T> where T : GroupElement<T>{
+namespace Hasse.Groups{
+	public class SubGroup<T> : IEnumerable<T>, ISubGroup where T : GroupElement<T>{
 		private T[] elements;
 
 		public SubGroup(IEnumerable<T> elements){
@@ -23,8 +24,22 @@ namespace Hasse.Groups.Generic{
 			return false;
 		}
 
-		public bool Contains(IEnumerable<T> check){
-			foreach(var el in check)
+		public bool Contains(IGroupElement element){
+			foreach(var el in elements)
+				if(el.Equals(element))
+					return true;
+			return false;
+		}
+
+		public bool Contains(IEnumerable<IGroupElement> elements){
+			foreach(var el in elements)
+				if(!Contains(el))
+					return false;
+			return true;
+		}
+
+		public bool Contains(IEnumerable<T> elements){
+			foreach(var el in elements)
 				if(!Contains(el))
 					return false;
 			return true;
@@ -37,6 +52,11 @@ namespace Hasse.Groups.Generic{
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator(){
 			return GetEnumerator();
+		}
+
+		IEnumerator<IGroupElement> IEnumerable<IGroupElement>.GetEnumerator(){
+			foreach(var el in elements)
+				yield return el;
 		}
 
 		public T this[int index]{
@@ -59,14 +79,21 @@ namespace Hasse.Groups.Generic{
 			return true;
 		}
 
-		public virtual void Dump(){
-			Console.Write('{');
-			Console.Write(elements[0]);
+		public override string ToString(){
+			StringBuilder sb = new StringBuilder();
+			sb.Append('{');
+			if(elements.Length > 0)
+				sb.Append(elements[0]);
 			for(int i = 1; i < Order; i++){
-				Console.Write(',');
-				Console.Write(elements[i]);
+				sb.Append(", ");
+				sb.Append(elements[i]);
 			}
-			Console.WriteLine('}');
+			sb.Append('}');
+			return sb.ToString();
+		}
+
+		public override int GetHashCode(){
+			return base.GetHashCode();
 		}
 	}
 }

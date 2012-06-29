@@ -1,7 +1,7 @@
 using System;
 
-namespace Hasse.Groups.Generic{
-	public abstract class GroupElement<T> where T : class{
+namespace Hasse.Groups{
+	public abstract class GroupElement<T> : IGroupElement where T : class{
 		public abstract T Multiply(T other);
 
 		public static T operator*(GroupElement<T> left, T right){

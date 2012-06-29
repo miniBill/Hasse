@@ -1,5 +1,5 @@
 using System;
-using Hasse.Groups.Generic;
+using System.Text;
 
 namespace Hasse.Groups.Product{
 	public class PowerElement<T> : GroupElement<PowerElement<T>> where T : GroupElement<T>{
@@ -33,6 +33,21 @@ namespace Hasse.Groups.Product{
 				toret += Elements[i].GetHashCode();
 			}
 			return toret;
+		}
+
+		public override string ToString(){
+			StringBuilder sb = new StringBuilder();
+			if(Elements.Length > 1)
+				sb.Append('{');
+			if(Elements.Length > 0)
+			sb.Append(Elements[0]);
+			for(int i = 1; i < Elements.Length; i++){
+				sb.Append(", ");
+				sb.Append(Elements[i]);
+			}
+			if(Elements.Length > 1)
+				sb.Append('}');
+			return sb.ToString();
 		}
 	}
 }

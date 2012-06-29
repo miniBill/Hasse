@@ -43,9 +43,6 @@
     <Compile Include="Generator.cs" />
     <Compile Include="GeneratorFactory.cs" />
     <Compile Include="Groups\Cyclic\CyclicElement.cs" />
-    <Compile Include="Groups\Generic\GroupElement.cs" />
-    <Compile Include="Groups\Generic\Group.cs" />
-    <Compile Include="Groups\Generic\SubGroup.cs" />
     <Compile Include="Groups\Cyclic\CyclicGroup.cs" />
     <Compile Include="Groups\Cyclic\CyclicProductGroup.cs" />
     <Compile Include="Groups\Product\ProductElement.cs" />
@@ -54,13 +51,22 @@
     <Compile Include="Groups\Cyclic\CyclicSubGroup.cs" />
     <Compile Include="Groups\Product\PowerGroup.cs" />
     <Compile Include="Groups\Product\PowerElement.cs" />
+    <Compile Include="Groups\Permutation\SymmetricGroup.cs" />
+    <Compile Include="Groups\Permutation\SymmetricElement.cs" />
+    <Compile Include="Groups\Group.cs" />
+    <Compile Include="Groups\GroupElement.cs" />
+    <Compile Include="Groups\SubGroup.cs" />
+    <Compile Include="Groups\ISubGroup.cs" />
+    <Compile Include="Groups\IGroupElement.cs" />
+    <Compile Include="AbstractWrapper.cs" />
+    <Compile Include="WrapperFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Groups\" />
     <Folder Include="Groups\Cyclic\" />
-    <Folder Include="Groups\Generic\" />
     <Folder Include="Groups\Product\" />
+    <Folder Include="Groups\Permutation\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

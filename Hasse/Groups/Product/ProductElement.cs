@@ -1,5 +1,4 @@
 using System;
-using Hasse.Groups.Generic;
 
 namespace Hasse.Groups.Product{
 	public class ProductElement<U,V> : GroupElement<ProductElement<U,V>> where U : GroupElement<U> where V : GroupElement<V>{

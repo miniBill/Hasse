@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Hasse.Groups.Product;
 
-namespace Hasse.Groups.Generic{
+namespace Hasse.Groups{
 	public abstract class Group<T> where T : GroupElement<T>{
 		public virtual SubGroup<T> BuildSubgroup(IEnumerable<T> elements){
 			return new SubGroup<T>(elements);

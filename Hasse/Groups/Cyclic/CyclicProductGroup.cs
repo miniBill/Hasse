@@ -1,5 +1,4 @@
 using System;
-using Hasse.Groups.Generic;
 using Hasse.Groups.Product;
 
 namespace Hasse.Groups.Cyclic{

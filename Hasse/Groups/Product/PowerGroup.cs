@@ -1,10 +1,9 @@
 using System;
-using Hasse.Groups.Generic;
 
 namespace Hasse.Groups.Product{
 	public class PowerGroup<T> : Group<PowerElement<T>> where T : GroupElement<T>{
 		public Group<T> Group{get; private set;}
-		public int Power{get; private set;}
+		public new int Power{get; private set;}
 
 		public PowerGroup(Group<T> group, int power){
 			Group = group;
@@ -38,6 +37,10 @@ namespace Hasse.Groups.Product{
 				exp /= 2;
 			}
 			return result;
+		}
+
+		public override string ToString(){
+			return string.Format("{0}^{1}", Group, Power);
 		}
 	}
 }

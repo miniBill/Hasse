@@ -1,20 +1,26 @@
 using System;
 using System.Collections.Generic;
-using Hasse.Groups.Generic;
+using System.Text;
 
 namespace Hasse.Groups.Cyclic{
 	public class CyclicSubGroup : SubGroup<CyclicElement>{
 		public CyclicSubGroup(IEnumerable<CyclicElement> elements) : base(elements) { }
 
-		public override void Dump(){
-			Console.Write('{');
-			Console.Write(this[0].Value);
+		public override string ToString(){
+			StringBuilder sb = new StringBuilder();
+			sb.Append('{');
+			if(Order > 0)
+				sb.Append(this[0].Value);
 			for(int i = 1; i < Order; i++){
-				Console.Write(',');
-				Console.Write(this[i].Value);
+				sb.Append(", ");
+				sb.Append(this[i].Value);
 			}
-			Console.Write("}_");
-			Console.WriteLine(this[0].Order);
+			sb.Append("}_");
+			if(Order > 0)
+				sb.Append(this[0].Order);
+			else
+				sb.Append('?');
+			return sb.ToString();
 		}
 	}
 }
