@@ -1,7 +1,12 @@
 using System;
+using System.Collections.Generic;
 
 namespace Hasse.Groups{
 	public abstract class Group<T> where T : GroupElement<T>{
+		public virtual SubGroup<T> BuildSubgroup(IEnumerable<T> elements){
+			return new SubGroup<T>(elements);
+		}
+		
 		public T this[int index]{
 			get{
 				return GetElement(index);

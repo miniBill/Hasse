@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 
 namespace Hasse.Groups.Cyclic{
-	public class SubCyclicGroup : SubGroup<CyclicElement>{
+	public class CyclicSubGroup : SubGroup<CyclicElement>{
+		public CyclicSubGroup(IEnumerable<CyclicElement> elements) : base(elements) { }
+
 		public override void Dump(){
 			Console.Write('{');
 			Console.Write(this[0].Value);
@@ -15,4 +17,3 @@ namespace Hasse.Groups.Cyclic{
 		}
 	}
 }
-

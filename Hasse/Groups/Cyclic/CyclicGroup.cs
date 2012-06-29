@@ -26,5 +26,9 @@ namespace Hasse.Groups.Cyclic{
 		public static CyclicProductGroup operator*(CyclicGroup left, CyclicGroup right){
 			return new CyclicProductGroup(left, right);
 		}
+
+		public override SubGroup<CyclicElement> BuildSubgroup(System.Collections.Generic.IEnumerable<CyclicElement> generated){
+			return new CyclicSubGroup(generated);
+		}
 	}
 }

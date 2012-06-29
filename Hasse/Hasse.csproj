@@ -42,7 +42,6 @@
     <Compile Include="Generator.cs" />
     <Compile Include="GeneratorFactory.cs" />
     <Compile Include="Groups\Cyclic\CyclicElement.cs" />
-    <Compile Include="Groups\Cyclic\SubCyclicGroup.cs" />
     <Compile Include="Groups\Generic\GroupElement.cs" />
     <Compile Include="Groups\Generic\Group.cs" />
     <Compile Include="Groups\Generic\SubGroup.cs" />
@@ -51,6 +50,7 @@
     <Compile Include="Groups\Product\ProductElement.cs" />
     <Compile Include="Groups\Product\ProductGroup.cs" />
     <Compile Include="Groups\Cyclic\CyclicProductElement.cs" />
+    <Compile Include="Groups\Cyclic\CyclicSubGroup.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

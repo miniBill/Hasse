@@ -3,37 +3,37 @@ using System.Collections.Generic;
 using Hasse.Groups;
 
 namespace Hasse{
-	public class Generator<U, V> where U : GroupElement<U> where V : SubGroup<U>, new(){
-		public Group<U> Group{get; private set;}
+	public class Generator<T> where T : GroupElement<T>{
+		public Group<T> Group{get; private set;}
 
-		public Generator(Group<U> group){
+		public Generator(Group<T> group){
 			Group=group;
 		}
 
-		public IEnumerable<V> Generate(){
-			var generated = new List<V>();
+		public IEnumerable<SubGroup<T>> Generate(){
+			var generated = new List<SubGroup<T>>();
 			for(int i = 0; i < Group.Order; i++){
-				V single = Generate(Group[i]);
+				SubGroup<T> single = Generate(Group[i]);
 				if(!generated.Contains(single)){
 					generated.Add(single);
 					Generate(generated, single);
 				}
 			}
-			generated.Sort(new CountComparer<V>());
+			generated.Sort(new CountComparer());
 			return generated;
 		}
 
-		private class CountComparer<T> : IComparer<T> where T : SubGroup<U>{
-			public int Compare(T x, T y){
+		private class CountComparer : IComparer<SubGroup<T>>{
+			public int Compare(SubGroup<T> x, SubGroup<T> y){
 				if(x.Order > y.Order)
 					return 1;
 				return x.Order == y.Order ? 0 : -1;
 			}
 		}
 
-		public V Generate(U gen){
-			var generated = new List<U>();
-			U curr = Group.Unity;
+		public SubGroup<T> Generate(T gen){
+			var generated = new List<T>();
+			T curr = Group.Unity;
 			while(!generated.Contains(curr)){
 				generated.Add(curr);
 				curr *= gen;
@@ -41,17 +41,14 @@ namespace Hasse{
 			return Build(generated);
 		}
 
-		public V Build(IEnumerable<U> generated){
-
-			V toret = new V();
-			toret.Setup(generated);
-			return toret;
+		public SubGroup<T> Build(IEnumerable<T> generated){
+			return Group.BuildSubgroup(generated);
 		}
 
-		public void Generate(List<V> generated, V curr){
+		public void Generate(List<SubGroup<T>> generated, SubGroup<T> curr){
 			for(int i = 0; i < Group.Order; i++){
 				if(!curr.Contains(Group[i])){
-					V next = Generate(curr, Group[i]);
+					SubGroup<T> next = Generate(curr, Group[i]);
 					if(!generated.Contains(next)){
 						generated.Add(next);
 						Generate(generated, next);
@@ -60,16 +57,16 @@ namespace Hasse{
 			}
 		}
 
-		public V Generate(SubGroup<U> sub, U next){
-			List<U> elements = new List<U>();
+		public SubGroup<T> Generate(SubGroup<T> sub, T next){
+			List<T> elements = new List<T>();
 			elements.AddRange(sub);
 			foreach(var element in sub){
-				U curr = Group.Unity;
+				T curr = Group.Unity;
 				do{
-					U resr = element * curr;
+					T resr = element * curr;
 					if(!elements.Contains(resr))
 						elements.Add(resr);
-					U resl = curr * element;
+					T resl = curr * element;
 					if(!elements.Contains(resl))
 						elements.Add(resl);
 					curr *= next;

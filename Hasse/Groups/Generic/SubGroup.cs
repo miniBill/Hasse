@@ -6,13 +6,6 @@ namespace Hasse.Groups{
 	public class SubGroup<T> : IEnumerable<T> where T : GroupElement<T>{
 		private T[] elements;
 
-		public void Setup(IEnumerable<T> elements){
-			this.elements = elements.ToArray();
-		}
-
-		public SubGroup(){
-		}
-
 		public SubGroup(IEnumerable<T> elements){
 			this.elements = elements.ToArray();
 		}

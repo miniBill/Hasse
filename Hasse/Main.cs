@@ -15,7 +15,7 @@ namespace Hasse{
 
 			var group = new CyclicGroup(4);
 
-			var g = GeneratorFactory.Create<CyclicElement, SubCyclicGroup>(group);
+			var g = GeneratorFactory.Create(group);
 			foreach(var sub in g.Generate())
 				sub.Dump();
 
