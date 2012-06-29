@@ -18,9 +18,12 @@ namespace Hasse.Groups{
 
 		public abstract int Order{get;}
 
+		public static Group<ProductElement<T,T>> operator*(Group<T> left, Group<T> right){
+			return left.Multiply(right);
+		}
+
 		public Group<ProductElement<T,V>> Multiply<V>(Group<V> other) where V : GroupElement<V>{
 			return new ProductGroup<T,V>(this, other);
 		}
 	}
 }
-

@@ -30,5 +30,9 @@ namespace Hasse.Groups{
 		public override string ToString(){
 			return string.Format("{0}_{1}", Value, Order);
 		}
+
+		public override int GetHashCode(){
+			return Value ^ Order;
+		}
 	}
 }

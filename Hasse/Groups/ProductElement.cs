@@ -20,6 +20,9 @@ namespace Hasse.Groups{
 		public override ProductElement<U, V> Multiply(ProductElement<U, V> other){
 			return new ProductElement<U, V>(left * other.left, right * other.right);
 		}
+
+		public override int GetHashCode(){
+			return left.GetHashCode() ^ right.GetHashCode();
+		}
 	}
 }
-

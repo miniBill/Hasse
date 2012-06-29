@@ -9,5 +9,7 @@ namespace Hasse.Groups{
 		}
 
 		public abstract override bool Equals(object obj);
+
+		public abstract override int GetHashCode();
 	}
 }

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using Hasse.Groups;
 
 namespace Hasse{
-	public class Generator<T, U> where T : GroupElement<T> where U : SubGroup<T>, new(){
-		public Group<T> Group{get; private set;}
+	public class Generator<U, V> where U : GroupElement<U> where V : SubGroup<U>, new(){
+		public Group<U> Group{get; private set;}
 
-		public Generator(Group<T> group){
+		public Generator(Group<U> group){
 			Group=group;
 		}
 
-		public IEnumerable<U> Generate(){
-			var generated = new List<U>();
+		public IEnumerable<V> Generate(){
+			var generated = new List<V>();
 			for(int i = 0; i < Group.Order; i++){
-				U single = Generate(Group[i]);
+				V single = Generate(Group[i]);
 				if(!generated.Contains(single)){
 					generated.Add(single);
 					Generate(generated, single);
@@ -22,9 +22,9 @@ namespace Hasse{
 			return generated;
 		}
 
-		public U Generate(T gen){
-			var generated = new List<T>();
-			T curr = Group.Unity;
+		public V Generate(U gen){
+			var generated = new List<U>();
+			U curr = Group.Unity;
 			while(!generated.Contains(curr)){
 				generated.Add(curr);
 				curr *= gen;
@@ -32,16 +32,16 @@ namespace Hasse{
 			return Build(generated);
 		}
 
-		public U Build(IEnumerable<T> generated){
-			U toret = new U();
+		public V Build(IEnumerable<U> generated){
+			V toret = new V();
 			toret.Setup(generated);
 			return toret;
 		}
 
-		public void Generate(List<U> generated, U curr){
+		public void Generate(List<V> generated, V curr){
 			for(int i = 0; i < Group.Order; i++){
 				if(!curr.Contains(Group[i])){
-					U next = Generate(curr, Group[i]);
+					V next = Generate(curr, Group[i]);
 					if(!generated.Contains(next)){
 						generated.Add(next);
 						Generate(generated, next);
@@ -50,16 +50,16 @@ namespace Hasse{
 			}
 		}
 
-		public U Generate(SubGroup<T> sub, T next){
-			List<T> elements = new List<T>();
+		public V Generate(SubGroup<U> sub, U next){
+			List<U> elements = new List<U>();
 			elements.AddRange(sub);
 			foreach(var element in sub){
-				T curr = Group.Unity;
+				U curr = Group.Unity;
 				do{
-					T resr = element * curr;
+					U resr = element * curr;
 					if(!elements.Contains(resr))
 						elements.Add(resr);
-					T resl = curr * element;
+					U resl = curr * element;
 					if(!elements.Contains(resl))
 						elements.Add(resl);
 					curr *= next;

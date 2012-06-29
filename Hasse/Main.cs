@@ -13,8 +13,15 @@ namespace Hasse{
 			CyclicElement test2 = a * b;
 			Console.WriteLine(test2);
 
-			var g = new Generator<CyclicElement,SubCyclicGroup>(new CyclicGroup(4));
+			var group = new CyclicGroup(4);
+
+			var g = GeneratorFactory.Create<CyclicElement, SubCyclicGroup>(group);
 			foreach(var sub in g.Generate())
+				sub.Dump();
+
+			var prod = group * group;
+			var g2 = GeneratorFactory.Create(prod);
+			foreach(var sub in g2.Generate())
 				sub.Dump();
 		}
 	}

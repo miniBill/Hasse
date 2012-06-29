@@ -46,9 +46,9 @@
     <Compile Include="Groups\CyclicGroup.cs" />
     <Compile Include="Groups\Group.cs" />
     <Compile Include="Groups\SubCyclicGroup.cs" />
-    <Compile Include="StandardGenerator.cs" />
     <Compile Include="Groups\ProductGroup.cs" />
     <Compile Include="Groups\ProductElement.cs" />
+    <Compile Include="GeneratorFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
