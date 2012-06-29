@@ -22,5 +22,9 @@ namespace Hasse.Groups{
 		public override CyclicElement GetElement(int index){
 			return elements[index];
 		}
+
+		public static CyclicProductGroup operator*(CyclicGroup left, CyclicGroup right){
+			return new CyclicProductGroup(left, right);
+		}
 	}
 }

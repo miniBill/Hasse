@@ -24,5 +24,9 @@ namespace Hasse.Groups{
 		public override int GetHashCode(){
 			return left.GetHashCode() ^ right.GetHashCode();
 		}
+
+		public override string ToString(){
+			return string.Format("({0},{1})", left, right);
+		}
 	}
 }

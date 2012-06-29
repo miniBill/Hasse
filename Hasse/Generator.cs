@@ -19,7 +19,16 @@ namespace Hasse{
 					Generate(generated, single);
 				}
 			}
+			generated.Sort(new CountComparer<V>());
 			return generated;
+		}
+
+		private class CountComparer<T> : IComparer<T> where T : SubGroup<U>{
+			public int Compare(T x, T y){
+				if(x.Order > y.Order)
+					return 1;
+				return x.Order == y.Order ? 0 : -1;
+			}
 		}
 
 		public V Generate(U gen){
@@ -33,6 +42,7 @@ namespace Hasse{
 		}
 
 		public V Build(IEnumerable<U> generated){
+
 			V toret = new V();
 			toret.Setup(generated);
 			return toret;
