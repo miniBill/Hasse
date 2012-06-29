@@ -31,15 +31,15 @@ namespace Hasse{
 					Console.Write(" elemento\"");
 				else
 					Console.Write(" elementi\"");
-				int item = 0;
+				int item = 1;
 				foreach(var sub in size)
 					Console.Write("; l{0}i{1}", size.Key, item++);
 				Console.WriteLine("; }");
 				if(size.Key > 1){
-					item = 0;
+					item = 1;
 					foreach(var sub in size){
 						foreach(var lower in genlist.Where(g => g.Key < size.Key)){
-							int lowitem = 0;
+							int lowitem = 1;
 							foreach(var low in lower){
 								if(sub.Contains(low))
 									Console.WriteLine("  l{0}i{1} -> l{2}i{3}", size.Key, item, lower.Key, lowitem);
