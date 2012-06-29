@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FC2C7812-6902-445C-9BA1-C39E9B9E921F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Hasse</RootNamespace>
+    <AssemblyName>Hasse</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <StartupObject>Hasse.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Externalconsole>true</Externalconsole>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Externalconsole>true</Externalconsole>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Groups\GroupElement.cs" />
+    <Compile Include="Groups\CalcException.cs" />
+    <Compile Include="Generator.cs" />
+    <Compile Include="Groups\CyclicElement.cs" />
+    <Compile Include="Groups\SubGroup.cs" />
+    <Compile Include="Groups\CyclicGroup.cs" />
+    <Compile Include="Groups\Group.cs" />
+    <Compile Include="Groups\SubCyclicGroup.cs" />
+    <Compile Include="StandardGenerator.cs" />
+    <Compile Include="Groups\ProductGroup.cs" />
+    <Compile Include="Groups\ProductElement.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Groups\" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
+          <TextStylePolicy FileWidth="120" TabWidth="4" RemoveTrailingWhitespace="True" inheritsSet="Mono" inheritsScope="text/plain" scope="text/x-csharp" />
+          <CSharpFormattingPolicy NamespaceBraceStyle="EndOfLineWithoutSpace" ClassBraceStyle="EndOfLineWithoutSpace" InterfaceBraceStyle="EndOfLineWithoutSpace" StructBraceStyle="EndOfLineWithoutSpace" EnumBraceStyle="EndOfLineWithoutSpace" MethodBraceStyle="EndOfLineWithoutSpace" AnonymousMethodBraceStyle="EndOfLineWithoutSpace" ConstructorBraceStyle="EndOfLineWithoutSpace" DestructorBraceStyle="EndOfLineWithoutSpace" PropertyBraceStyle="EndOfLineWithoutSpace" PropertyGetBraceStyle="EndOfLineWithoutSpace" PropertySetBraceStyle="EndOfLineWithoutSpace" AllowPropertyGetBlockInline="False" AllowPropertySetBlockInline="False" EventBraceStyle="EndOfLineWithoutSpace" EventAddBraceStyle="EndOfLineWithoutSpace" EventRemoveBraceStyle="EndOfLineWithoutSpace" AllowEventAddBlockInline="False" AllowEventRemoveBlockInline="False" StatementBraceStyle="EndOfLineWithoutSpace" IfElseBraceForcement="RemoveBraces" ForBraceForcement="RemoveBraces" ForEachBraceForcement="RemoveBraces" WhileBraceForcement="RemoveBraces" UsingBraceForcement="RemoveBraces" FixedBraceForcement="RemoveBraces" PlaceElseOnNewLine="True" PlaceElseIfOnNewLine="True" PlaceCatchOnNewLine="True" PlaceFinallyOnNewLine="True" BeforeMethodDeclarationParentheses="False" BeforeMethodCallParentheses="False" BeforeConstructorDeclarationParentheses="False" BeforeDelegateDeclarationParentheses="False" NewParentheses="False" IfParentheses="False" WhileParentheses="False" ForParentheses="False" ForeachParentheses="False" CatchParentheses="False" SwitchParentheses="False" LockParentheses="False" UsingParentheses="False" inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
+          <TextStylePolicy FileWidth="120" TabWidth="4" inheritsSet="Mono" inheritsScope="text/plain" scope="text/plain" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+</Project>
