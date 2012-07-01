@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Hasse.Groups{
-	public class LightSubGroup : ISubGroup<LightSubGroup,int>{
+namespace Hasse.Groups.Light{
+	public class SubGroup : ISubGroup<SubGroup,int>{
 		private List<int> backend = new List<int>();
-		private LightGroup group;
+		private Group group;
 
-		public LightSubGroup(LightGroup group, IEnumerable<int> elements){
+		public SubGroup(Group group, IEnumerable<int> elements){
 			this.group = group;
 			backend.AddRange(elements);
 		}
@@ -25,7 +25,7 @@ namespace Hasse.Groups{
 			}
 		}
 
-		public LightSubGroup Generate(int gen){
+		public SubGroup Generate(int gen){
 			List<int> elements = new List<int>();
 			elements.AddRange(elements);
 			foreach(var element in backend){
@@ -40,7 +40,7 @@ namespace Hasse.Groups{
 					curr = group.Multiply(curr, gen);
 				}while(curr != 0);
 			}
-			return new LightSubGroup(group, elements);
+			return new SubGroup(group, elements);
 		}
 
 		public bool Contains(int element){
@@ -55,7 +55,7 @@ namespace Hasse.Groups{
 			return GetEnumerator();
 		}
 
-		public bool Equals(LightSubGroup other){
+		public bool Equals(SubGroup other){
 			return Contains(other.backend) && other.Contains(backend);
 		}
 

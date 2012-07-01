@@ -1,7 +1,7 @@
 using System;
 
-namespace Hasse.Groups{
-	public abstract class GroupElement<T> : IGroupElement, IEquatable<T> where T : class{
+namespace Hasse.Groups.Heavy{
+	public abstract class GroupElement<T> : IEquatable<T> where T : class{
 		public abstract T Multiply(T other);
 
 		public static T operator*(GroupElement<T> left, T right){

@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Hasse.Groups.Product{
+namespace Hasse.Groups.Heavy.Product{
 	public class PowerElement<T> : GroupElement<PowerElement<T>> where T : GroupElement<T>{
 		public T[] Elements{get; private set;}
 

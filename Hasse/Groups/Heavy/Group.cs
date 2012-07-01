@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Hasse.Groups.Product;
+using Hasse.Groups.Heavy.Product;
 
-namespace Hasse.Groups{
+namespace Hasse.Groups.Heavy{
 	public abstract class Group<T> : IExpableGroup<SubGroup<T>, PowerGroup<T>> where T : GroupElement<T>{
 		public virtual SubGroup<T> BuildSubgroup(IEnumerable<T> elements){
 			return new SubGroup<T>(this, elements);

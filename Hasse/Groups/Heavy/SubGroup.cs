@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Hasse.Groups{
+namespace Hasse.Groups.Heavy{
 	public class SubGroup<T> : ISubGroup<SubGroup<T>,T> where T : GroupElement<T>{
 		private T[] elements;
 
@@ -29,18 +29,11 @@ namespace Hasse.Groups{
 			return false;
 		}
 
-		public bool Contains(IGroupElement element){
+		public bool Contains(T element){
 			foreach(var el in elements)
 				if(el.Equals(element))
 					return true;
 			return false;
-		}
-
-		public bool Contains(IEnumerable<IGroupElement> elements){
-			foreach(var el in elements)
-				if(!Contains(el))
-					return false;
-			return true;
 		}
 
 		public bool Contains(IEnumerable<T> elements){

@@ -1,13 +1,8 @@
 using System;
 
-namespace Hasse.Groups.Product{
+namespace Hasse.Groups.Heavy.Product{
 	public class ProductGroup<U,V> : Group<ProductElement<U,V>> where U : GroupElement<U> where V : GroupElement<V>{
-		private Group<U> left;
-		private Group<V> right;
-
 		public ProductGroup(Group<U> left, Group<V> right) : base(left.Order * right.Order) {
-			this.left = left;
-			this.right = right;
 			elements = new ProductElement<U, V>[Order];
 			for(int i = 0; i < left.Order; i++)
 				for(int j = 0; j < right.Order; j++)

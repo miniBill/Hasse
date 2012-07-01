@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Hasse.Groups;
-using Hasse.Groups.Product;
-using Hasse.Groups.Permutation;
+using Hasse.Groups.Heavy;
+using Hasse.Groups.Heavy.Product;
+using Hasse.Groups.Heavy.Permutation;
 
 namespace Hasse{
 	public class WrapperFactory{

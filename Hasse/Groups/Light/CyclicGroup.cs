@@ -2,8 +2,8 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 
-namespace Hasse.Groups.Cyclic{
-	public class CyclicGroup : LightGroup{
+namespace Hasse.Groups.Light{
+	public class CyclicGroup : Group{
 		public CyclicGroup(int order) : base(order){
 		}
 

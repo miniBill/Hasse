@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace Hasse.Groups{
-	public abstract class LightGroup : IExpableGroup<LightSubGroup, LightPowerGroup>{
+namespace Hasse.Groups.Light{
+	public abstract class Group : IExpableGroup<SubGroup, PowerGroup>{
 		private int order;
 
 		public int Order{
@@ -11,18 +11,18 @@ namespace Hasse.Groups{
 			}
 		}
 
-		public LightPowerGroup Power(int power){
-			throw new NotImplementedException();//return new LightPowerGroup(this, power);
+		public PowerGroup Power(int power){
+			return new PowerGroup(this, power);
 		}
 
-		public LightSubGroup Generate(int gen){
+		public SubGroup Generate(int gen){
 			var generated = new List<int>();
 			int curr = 0;
 			while(!generated.Contains(curr)){
 				generated.Add(curr);
 				curr = Multiply(curr, gen);
 			}
-			return new LightSubGroup(this, generated);
+			return new SubGroup(this, generated);
 		}
 
 		public abstract int Multiply(int left, int right);
@@ -31,7 +31,7 @@ namespace Hasse.Groups{
 
 		public abstract string ToString(IEnumerable<int> indexes);
 
-		public LightGroup(int order){
+		public Group(int order){
 			this.order = order;
 		}
 	}

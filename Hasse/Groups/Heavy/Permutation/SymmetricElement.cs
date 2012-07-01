@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Hasse.Groups.Permutation{
+namespace Hasse.Groups.Heavy.Permutation{
 	public class SymmetricElement : GroupElement<SymmetricElement>{
 		private int[] Value{get;set;}
 

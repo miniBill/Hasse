@@ -1,6 +1,6 @@
 using System;
 
-namespace Hasse.Groups.Product{
+namespace Hasse.Groups.Heavy.Product{
 	public class ProductElement<U,V> : GroupElement<ProductElement<U,V>> where U : GroupElement<U> where V : GroupElement<V>{
 		public U Left{get; private set;}
 		public V Right{get; private set;}
