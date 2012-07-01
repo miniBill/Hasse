@@ -5,7 +5,7 @@ namespace Hasse.Groups.Product{
 		private Group<U> left;
 		private Group<V> right;
 
-		public ProductGroup(Group<U> left, Group<V> right){
+		public ProductGroup(Group<U> left, Group<V> right) : base(left.Order * right.Order) {
 			this.left = left;
 			this.right = right;
 			elements = new ProductElement<U, V>[Order];
@@ -22,12 +22,6 @@ namespace Hasse.Groups.Product{
 
 		public override ProductElement<U, V> GetElement(int index){
 			return elements[index];
-		}
-
-		public override int Order{
-			get{
-				return left.Order * right.Order;
-			}
 		}
 	}
 }

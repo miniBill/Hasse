@@ -6,10 +6,9 @@ namespace Hasse.Groups.Permutation{
 		private int Size{get;set;}
 		private int FullSize{get;set;}
 
-		public SymmetricGroup(int size){
+		public SymmetricGroup(int size) : base(Factorial(size)){
 			Size = size;
-			FullSize = Factorial(Size);
-			elements = new SymmetricElement[FullSize];
+			elements = new SymmetricElement[Order];
 			for(int i = 0; i < FullSize; i++){
 				int[] curr = new int[Size];
 				int curval = i;
@@ -41,12 +40,6 @@ namespace Hasse.Groups.Permutation{
 
 		public override SymmetricElement GetElement(int index){
 			return elements[index];
-		}
-
-		public override int Order{
-			get{
-				return FullSize;
-			}
 		}
 
 		public static int Factorial(int n){

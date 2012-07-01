@@ -8,7 +8,7 @@ using Hasse.Groups.Permutation;
 namespace Hasse{
 	static class Program{
 		public static void Main(string[] args){
-			var genlist = Generate(args);
+			var genlist = Generate<LightSubGroup,int>(args);
 			if(genlist == null)
 				return;
 			Console.WriteLine("  {");
@@ -47,12 +47,12 @@ namespace Hasse{
 			Console.WriteLine("}");
 		}
 
-		public static IEnumerable<IGrouping<int,ISubGroup>> Generate(string[] args){
+		public static IEnumerable<IGrouping<int,ISubGroup<T,U>>> Generate<T,U>(string[] args){
 			if(args.Length < 2){
 				Console.Error.WriteLine("Ohnoes, needz moar argumentz!");
 				return null;
 			}
-			if(args[0] == "z" || args[0] == "Z"){
+			/*if(args[0] == "z" || args[0] == "Z"){
 				var @group = (new CyclicGroup(Convert.ToInt32(args[1]))).Power(args.Length == 2 ? 1 : Convert.ToInt32(args[2]));
 				var g2 = GeneratorFactory.Create(@group);
 				Console.WriteLine("digraph G { ");
@@ -71,7 +71,7 @@ namespace Hasse{
 						orderby sizegroup.Key descending
 						select sizegroup;
 				return WrapperFactory.CreateWrapper(gen.ToList());
-			}
+			}*/
 			return null;
 		}
 	}

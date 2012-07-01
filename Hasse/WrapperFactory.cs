@@ -7,8 +7,8 @@ using Hasse.Groups.Permutation;
 
 namespace Hasse{
 	public class WrapperFactory{
-		public static IEnumerable<IGrouping<int,ISubGroup>> CreateWrapper<T>(List<IGrouping<int,SubGroup<PowerElement<T>>>> list) where T : GroupElement<T>{
-			return new AbstractWrapper<T>(list);
+		public static IEnumerable<IGrouping<int,ISubGroup<T,U>>> CreateWrapper<T,U>(IEnumerable<IGrouping<int,SubGroup<PowerElement<U>>>> list) where U : GroupElement<U>{
+			return new AbstractWrapper<T, U>(list);
 		}
 	}
 }

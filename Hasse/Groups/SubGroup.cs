@@ -1,14 +1,16 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Hasse.Groups{
-	public class SubGroup<T> : IEnumerable<T>, ISubGroup where T : GroupElement<T>{
+	public class SubGroup<T> : ISubGroup<SubGroup<T>,T> where T : GroupElement<T>{
 		private T[] elements;
 
-		public SubGroup(IEnumerable<T> elements){
+		public SubGroup(Group<T> group, IEnumerable<T> elements){
 			this.elements = elements.ToArray();
+			this.group = group;
 		}
 
 		public int Order{
@@ -17,7 +19,10 @@ namespace Hasse.Groups{
 			}
 		}
 
-		public bool Contains(T element){
+		private Group<T> group;
+
+		public bool Contains(int index){
+			T element = group.GetElement(index);
 			foreach(var el in elements)
 				if(el.Equals(element))
 					return true;
@@ -50,13 +55,8 @@ namespace Hasse.Groups{
 				yield return el;
 		}
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator(){
+		IEnumerator IEnumerable.GetEnumerator(){
 			return GetEnumerator();
-		}
-
-		IEnumerator<IGroupElement> IEnumerable<IGroupElement>.GetEnumerator(){
-			foreach(var el in elements)
-				yield return el;
 		}
 
 		public T this[int index]{
@@ -69,6 +69,10 @@ namespace Hasse.Groups{
 			SubGroup<T> sobj = obj as SubGroup<T>;
 			if(sobj == null)
 				return false;
+			return Equals(sobj);
+		}
+
+		public bool Equals(SubGroup<T> sobj){
 			return Contains(sobj.elements) && sobj.Contains(elements);
 		}
 
@@ -94,6 +98,25 @@ namespace Hasse.Groups{
 
 		public override int GetHashCode(){
 			return base.GetHashCode();
+		}
+
+		public SubGroup<T> Generate(int index){
+			NCList<T> elements = new NCList<T>();
+			T gen = group[index];
+			elements.AddRange(elements);
+			foreach(var element in elements){
+				T curr = group.Unity;
+				do{
+					T resr = element * curr;
+					if(!elements.Contains(resr))
+						elements.Add(resr);
+					T resl = curr * element;
+					if(!elements.Contains(resl))
+						elements.Add(resl);
+					curr *= gen;
+				}while(!curr.Equals(group.Unity));
+			}
+			return group.BuildSubgroup(elements);
 		}
 	}
 }

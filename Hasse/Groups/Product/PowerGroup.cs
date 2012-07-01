@@ -3,26 +3,27 @@ using System;
 namespace Hasse.Groups.Product{
 	public class PowerGroup<T> : Group<PowerElement<T>> where T : GroupElement<T>{
 		public Group<T> Group{get; private set;}
-		public new int Power{get; private set;}
+		public int Power{get; private set;}
 
-		public PowerGroup(Group<T> group, int power){
+		public PowerGroup(Group<T> group, int power) : base(Pow(group.Order, power)){
 			Group = group;
 			Power = power;
+			elements = new PowerElement<T>[Order];
+			for(int index = 0; index < Order; index++){
+				int curr = index;
+				T[] values = new T[Power];
+				for(int i = 0; i < Power; i++){
+					values[i] = Group[curr % Group.Order];
+					curr /= Group.Order;
+				}
+				elements[index] = new PowerElement<T>(values);
+			}
 		}
+
+		private PowerElement<T>[] elements;
 
 		public override PowerElement<T> GetElement(int index){
-			T[] values = new T[Power];
-			for(int i = 0; i < Power; i++){
-				values[i] = Group[index % Group.Order];
-				index /= Group.Order;
-			}
-			return new PowerElement<T>(values);
-		}
-
-		public override int Order{
-			get{
-				return Pow(Group.Order, Power);
-			}
+			return elements[index];
 		}
 
 		public static int Pow(int x, int exp){

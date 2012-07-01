@@ -16,10 +16,7 @@ namespace Hasse.Groups.Permutation{
 			return new SymmetricElement(res);
 		}
 
-		public override bool Equals(object obj){
-			var pobj = obj as SymmetricElement;
-			if(pobj == null)
-				return false;
+		public override bool Equals(SymmetricElement pobj){
 			for(int i = 0; i < Value.Length; i++)
 				if(Value[i] != pobj.Value[i])
 					return false;

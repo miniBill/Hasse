@@ -1,34 +1,38 @@
 using System;
+using System.Text;
+using System.Collections.Generic;
 
 namespace Hasse.Groups.Cyclic{
-	public class CyclicGroup : Group<CyclicElement>{
-		private int order;
-
-		public override int Order{
-			get{
-				return order;
-			}
+	public class CyclicGroup : LightGroup{
+		public CyclicGroup(int order) : base(order){
 		}
 
-		public CyclicGroup(int order){
-			this.order = order;
-			elements = new CyclicElement[order];
-			for(int i = 0; i < order; i++)
-				elements[i] = new CyclicElement(i, order);
+		public override int Multiply(int left, int right){
+			return (left + right) % Order;
 		}
 
-		private CyclicElement[] elements;
-
-		public override CyclicElement GetElement(int index){
-			return elements[index];
+		public override string ToString(int index){
+			return string.Format("{0}_{1}", index, Order);
 		}
 
-		public static CyclicProductGroup operator*(CyclicGroup left, CyclicGroup right){
-			return new CyclicProductGroup(left, right);
-		}
-
-		public override SubGroup<CyclicElement> BuildSubgroup(System.Collections.Generic.IEnumerable<CyclicElement> generated){
-			return new CyclicSubGroup(generated);
+		public override string ToString(IEnumerable<int> indexes){
+			StringBuilder sb = new StringBuilder();
+			sb.Append('{');
+			var enumerator = indexes.GetEnumerator();
+			if(enumerator.MoveNext())
+				for(;;){
+					sb.Append(enumerator.Current);
+					if(enumerator.MoveNext())
+						sb.Append(", ");
+					else
+						break;
+				}
+			sb.Append("}_");
+			if(Order > 0)
+				sb.Append(Order);
+			else
+				sb.Append('?');
+			return sb.ToString();
 		}
 	}
 }

@@ -10,10 +10,7 @@ namespace Hasse.Groups.Product{
 			Right = right;
 		}
 
-		public override bool Equals(object obj){
-			var pobj = obj as ProductElement<U,V>;
-			if(pobj == null)
-				return false;
+		public override bool Equals(ProductElement<U,V> pobj){
 			return pobj.Left.Equals(Left) && pobj.Right.Equals(Right);
 		}
 

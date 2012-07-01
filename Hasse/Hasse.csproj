@@ -41,14 +41,9 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Groups\CalcException.cs" />
     <Compile Include="Generator.cs" />
-    <Compile Include="GeneratorFactory.cs" />
-    <Compile Include="Groups\Cyclic\CyclicElement.cs" />
     <Compile Include="Groups\Cyclic\CyclicGroup.cs" />
-    <Compile Include="Groups\Cyclic\CyclicProductGroup.cs" />
     <Compile Include="Groups\Product\ProductElement.cs" />
     <Compile Include="Groups\Product\ProductGroup.cs" />
-    <Compile Include="Groups\Cyclic\CyclicProductElement.cs" />
-    <Compile Include="Groups\Cyclic\CyclicSubGroup.cs" />
     <Compile Include="Groups\Product\PowerGroup.cs" />
     <Compile Include="Groups\Product\PowerElement.cs" />
     <Compile Include="Groups\Permutation\SymmetricGroup.cs" />
@@ -60,6 +55,14 @@
     <Compile Include="Groups\IGroupElement.cs" />
     <Compile Include="AbstractWrapper.cs" />
     <Compile Include="WrapperFactory.cs" />
+    <Compile Include="Groups\Product\LightPowerElement.cs" />
+    <Compile Include="Groups\LightGroup.cs" />
+    <Compile Include="Groups\LightSubGroup.cs" />
+    <Compile Include="Groups\IGroup.cs" />
+    <Compile Include="GeneratorFactory.cs" />
+    <Compile Include="NCList.cs" />
+    <Compile Include="Groups\LightPowerGroup.cs" />
+    <Compile Include="Groups\IExpableGroup.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

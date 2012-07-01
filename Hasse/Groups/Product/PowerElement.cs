@@ -9,19 +9,16 @@ namespace Hasse.Groups.Product{
 			Elements = elements;
 		}
 
-		public override PowerElement<T> Multiply(PowerElement<T> other){
+		 public override PowerElement<T> Multiply(PowerElement<T> other){
 			T[] res = new T[Elements.Length];
 			for(int i = 0; i < Elements.Length; i++)
 				res[i] = Elements[i] * other.Elements[i];
 			return new PowerElement<T>(res);
 		}
 
-		public override bool Equals(object obj){
-			var pobj = obj as PowerElement<T>;
-			if(pobj == null)
-				return false;
+		public override bool Equals(PowerElement<T> obj){
 			for(int i = 0; i < Elements.Length; i++)
-				if(!Elements[i].Equals(pobj.Elements[i]))
+				if(!Elements[i].Equals(obj.Elements[i]))
 					return false;
 			return true;
 		}
