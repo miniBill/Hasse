@@ -3,26 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Hasse.Groups;
-using Hasse.Groups.Heavy;
-using Hasse.Groups.Heavy.Product;
 
 namespace Hasse{
-	public class AbstractWrapper<T,U> : IEnumerable<IGrouping<int,ISubGroup<T,U>>> where U : GroupElement<U>{
-		private IEnumerable<IGrouping<int,SubGroup<PowerElement<U>>>> list;
+	public class AbstractWrapper<TSub,TElem> : IEnumerable<IGrouping<int,IISubGroup<TElem>>> where TSub : IISubGroup<TElem>{
+		private IEnumerable<IGrouping<int,TSub>> list;
 
-		public AbstractWrapper(IEnumerable<IGrouping<int,SubGroup<PowerElement<U>>>> list){
+		public AbstractWrapper(IEnumerable<IGrouping<int,TSub>> list){
 			this.list = list;
 		}
 
-		public IEnumerator<IGrouping<int, ISubGroup<T,U>>> GetEnumerator(){
+		public IEnumerator<IGrouping<int, IISubGroup<TElem>>> GetEnumerator(){
 			foreach(var el in list)
 				yield return new AbstractGrouping(el);
 		}
 
-		private class AbstractGrouping : IGrouping<int, ISubGroup<T,U>>{
-			private IGrouping<int, SubGroup<PowerElement<U>>> wrapped;
+		private class AbstractGrouping : IGrouping<int, IISubGroup<TElem>>{
+			private IGrouping<int, TSub> wrapped;
 
-			public AbstractGrouping(IGrouping<int, SubGroup<PowerElement<U>>> wrapped){
+			public AbstractGrouping(IGrouping<int, TSub> wrapped){
 				this.wrapped = wrapped;
 			}
 
@@ -32,47 +30,9 @@ namespace Hasse{
 				}
 			}
 
-			public IEnumerator<ISubGroup<T,U>> GetEnumerator(){
+			public IEnumerator<IISubGroup<TElem>> GetEnumerator(){
 				foreach(var el in wrapped)
-					yield return new InnerWrapper<T,U>(el);
-			}
-
-			private class InnerWrapper<T, U> : ISubGroup<T, U>{
-				object wrapped;
-
-				public InnerWrapper(object wrapped){
-					this.wrapped = wrapped;
-				}
-
-				public bool Contains(int element){
-					throw new NotImplementedException();
-				}
-
-				public bool Contains(IEnumerable<U> elements){
-					throw new NotImplementedException();
-				}
-
-				public T Generate(int element){
-					throw new NotImplementedException();
-				}
-
-				public int Order{
-					get{
-						throw new NotImplementedException();
-					}
-				}
-
-				public bool Equals(T other){
-					throw new NotImplementedException();
-				}
-
-				public IEnumerator<U> GetEnumerator(){
-					throw new NotImplementedException();
-				}
-
-				IEnumerator IEnumerable.GetEnumerator(){
-					return GetEnumerator();
-				}
+					yield return el;
 			}
 
 			IEnumerator IEnumerable.GetEnumerator(){

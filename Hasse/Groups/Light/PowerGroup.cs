@@ -11,7 +11,20 @@ namespace Hasse.Groups.Light{
 		}
 
 		public override int Multiply(int left, int right){
-			throw new NotImplementedException();
+			int res = 0;
+			for(int i = 0; i < power; i++){
+				res *= group.Order;
+				res += group.Multiply(left % group.Order, right % group.Order);
+				left /= group.Order;
+				right /= group.Order;
+			}
+			int toret = 0;
+			for(int i = 0; i < power; i++){
+				toret *= group.Order;
+				toret += res % group.Order;
+				res /= group.Order;
+			}
+			return toret;
 		}
 
 		public override string ToString(int index){
