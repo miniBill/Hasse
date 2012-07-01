@@ -8,7 +8,7 @@ using Heavy = Hasse.Groups.Heavy;
 namespace Hasse{
 	static class Program{
 		public static void Main(string[] args){
-			Work(new string[]{"z", "10", "2"}); //args);
+			Work(args);
 		}
 
 		public static void Work(string[] args){
