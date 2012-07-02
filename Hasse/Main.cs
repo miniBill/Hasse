@@ -19,7 +19,7 @@ namespace Hasse{
 				return;
 			}
 			if(args[0] == "z" || args[0] == "Z"){
-				var @group = (new Light.CyclicGroup(Convert.ToInt32(args[1]))).Power(args.Length == 2 ? 1 : Convert.ToInt32(args[2]));
+				var @group = (new Light.CyclicGroup(Convert.ToUInt32(args[1]))).Power(args.Length == 2 ? 1 : Convert.ToUInt32(args[2]));
 				var g2 = GeneratorFactory.Create(@group);
 				Console.WriteLine("digraph G { ");
 				var gen = from subgroup in g2.Generate()
@@ -30,7 +30,7 @@ namespace Hasse{
 				Process(list);
 			}
 			if(args[0] == "s" || args[0] == "S"){
-				var @group = (new Heavy.Permutation.SymmetricGroup(Convert.ToInt32(args[1]))).Power(args.Length == 2 ? 1 : Convert.ToInt32(args[2]));
+				var @group = (new Heavy.Permutation.SymmetricGroup(Convert.ToUInt32(args[1]))).Power(args.Length == 2 ? 1 : Convert.ToUInt32(args[2]));
 				var g2 = GeneratorFactory.Create(@group);
 				Console.WriteLine("digraph G { ");
 				var gen = from subgroup in g2.Generate()
@@ -42,7 +42,7 @@ namespace Hasse{
 			}
 		}
 
-		public static void Process<U>(IEnumerable<IGrouping<int, U>> genlist) where U : IContainer<U>{
+		public static void Process<U>(IEnumerable<IGrouping<uint, U>> genlist) where U : IContainer<U>{
 			if(genlist == null)
 				return;
 			Console.WriteLine("  {");
@@ -59,7 +59,7 @@ namespace Hasse{
 					Console.Write(" elemento\"");
 				else
 					Console.Write(" elementi\"");
-				int item = 1;
+				uint item = 1;
 				foreach(var sub in size)
 					Console.Write("; l{0}i{1}", size.Key, item++);
 				Console.WriteLine("; }");
@@ -67,7 +67,7 @@ namespace Hasse{
 					item = 1;
 					foreach(var sub in size){
 						foreach(var lower in genlist.Where(g => g.Key < size.Key)){
-							int lowitem = 1;
+							uint lowitem = 1;
 							foreach(var low in lower){
 								if(sub.IsSupersetOf(low))
 									Console.WriteLine("  l{0}i{1} -> l{2}i{3}", size.Key, item, lower.Key, lowitem);

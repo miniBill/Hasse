@@ -3,16 +3,16 @@ using System;
 namespace Hasse.Groups.Heavy.Product{
 	public class PowerGroup<T> : Group<PowerElement<T>> where T : GroupElement<T>{
 		public Group<T> Group{get; private set;}
-		public new int Power{get; private set;}
+		public new uint Power{get; private set;}
 
-		public PowerGroup(Group<T> group, int power) : base(MyMath.Pow(group.Order, power)){
+		public PowerGroup(Group<T> group, uint power) : base(MyMath.Pow(group.Order, power)){
 			Group = group;
 			Power = power;
 			elements = new PowerElement<T>[Order];
-			for(int index = 0; index < Order; index++){
-				int curr = index;
+			for(uint index = 0; index < Order; index++){
+				uint curr = index;
 				T[] values = new T[Power];
-				for(int i = 0; i < Power; i++){
+				for(uint i = 0; i < Power; i++){
 					values[i] = Group[curr % Group.Order];
 					curr /= Group.Order;
 				}
@@ -22,7 +22,7 @@ namespace Hasse.Groups.Heavy.Product{
 
 		private PowerElement<T>[] elements;
 
-		public override PowerElement<T> GetElement(int index){
+		public override PowerElement<T> GetElement(uint index){
 			return elements[index];
 		}
 

@@ -4,10 +4,10 @@ using Hasse.Groups;
 
 namespace Hasse.Groups{
 	public interface ISubGroup<TSub> : IEquatable<TSub>{
-		bool Contains(int element);
+		bool Contains(uint element);
 
-		int Order{get;}
+		uint Order{get;}
 
-		TSub Generate(int element);
+		TSub Generate(uint element);
 	}
 }

@@ -8,17 +8,17 @@ namespace Hasse.Groups.Heavy{
 			return new SubGroup<TElem>(this, elements);
 		}
 
-		public Group(int order){
+		public Group(uint order){
 			Order = order;
 		}
 
-		public int Order{get; private set;}
+		public uint Order{get; private set;}
 
 		public static Group<ProductElement<TElem,TElem>> operator*(Group<TElem> left, Group<TElem> right){
 			return left.Multiply(right);
 		}
 
-		public PowerGroup<TElem> Power(int power){
+		public PowerGroup<TElem> Power(uint power){
 			return new PowerGroup<TElem>(this, power);
 		}
 
@@ -26,7 +26,7 @@ namespace Hasse.Groups.Heavy{
 			return new ProductGroup<TElem,V>(this, other);
 		}
 
-		public TElem this[int index]{
+		public TElem this[uint index]{
 			get{
 				return GetElement(index);
 			}
@@ -38,9 +38,9 @@ namespace Hasse.Groups.Heavy{
 			}
 		}
 
-		public abstract TElem GetElement(int index);
+		public abstract TElem GetElement(uint index);
 
-		public SubGroup<TElem> Generate(int index){
+		public SubGroup<TElem> Generate(uint index){
 			TElem gen = GetElement(index);
 			var generated = new List<TElem>();
 			TElem curr = Unity;

@@ -4,8 +4,8 @@ namespace Hasse.Groups.Heavy.Product{
 	public class ProductGroup<U,V> : Group<ProductElement<U,V>> where U : GroupElement<U> where V : GroupElement<V>{
 		public ProductGroup(Group<U> left, Group<V> right) : base(left.Order * right.Order) {
 			elements = new ProductElement<U, V>[Order];
-			for(int i = 0; i < left.Order; i++)
-				for(int j = 0; j < right.Order; j++)
+			for(uint i = 0; i < left.Order; i++)
+				for(uint j = 0; j < right.Order; j++)
 					elements[i * right.Order + j] = Multiply(left[i], right[j]);
 		}
 
@@ -15,7 +15,7 @@ namespace Hasse.Groups.Heavy.Product{
 
 		ProductElement<U,V>[] elements;
 
-		public override ProductElement<U, V> GetElement(int index){
+		public override ProductElement<U, V> GetElement(uint index){
 			return elements[index];
 		}
 	}

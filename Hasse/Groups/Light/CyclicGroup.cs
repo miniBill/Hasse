@@ -4,18 +4,18 @@ using System.Collections.Generic;
 
 namespace Hasse.Groups.Light{
 	public class CyclicGroup : Group{
-		public CyclicGroup(int order) : base(order){
+		public CyclicGroup(uint order) : base(order){
 		}
 
-		public override int Multiply(int left, int right){
+		public override uint Multiply(uint left, uint right){
 			return (left + right) % Order;
 		}
 
-		public override string ToString(int index){
+		public override string ToString(uint index){
 			return string.Format("{0}_{1}", index, Order);
 		}
 
-		public override string ToString(IEnumerable<int> indexes){
+		public override string ToString(IEnumerable<uint> indexes){
 			StringBuilder sb = new StringBuilder();
 			sb.Append('{');
 			var enumerator = indexes.GetEnumerator();

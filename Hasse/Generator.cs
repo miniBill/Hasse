@@ -12,7 +12,7 @@ namespace Hasse{
 
 		public IEnumerable<TSub> Generate(){
 			var generated = new List<TSub>();
-			for(int i = 0; i < Group.Order; i++){
+			for(uint i = 0; i < Group.Order; i++){
 				TSub single = Group.Generate(i);
 				if(!generated.Contains(single)){
 					generated.Add(single);
@@ -23,7 +23,7 @@ namespace Hasse{
 		}
 
 		public void Generate(List<TSub> generated, TSub curr){
-			for(int i = 0; i < Group.Order; i++){
+			for(uint i = 0; i < Group.Order; i++){
 				if(!curr.Contains(i)){
 					TSub next = curr.Generate(i);
 					if(!generated.Contains(next)){

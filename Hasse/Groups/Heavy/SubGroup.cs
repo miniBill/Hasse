@@ -13,15 +13,15 @@ namespace Hasse.Groups.Heavy{
 			this.group = group;
 		}
 
-		public int Order{
+		public uint Order{
 			get{
-				return elements.Length;
+				return (uint)elements.Length;
 			}
 		}
 
 		private Group<T> group;
 
-		public bool Contains(int index){
+		public bool Contains(uint index){
 			T element = group.GetElement(index);
 			foreach(var el in elements)
 				if(el.Equals(element))
@@ -72,7 +72,7 @@ namespace Hasse.Groups.Heavy{
 			sb.Append('{');
 			if(elements.Length > 0)
 				sb.Append(elements[0]);
-			for(int i = 1; i < Order; i++){
+			for(uint i = 1; i < Order; i++){
 				sb.Append(", ");
 				sb.Append(elements[i]);
 			}
@@ -84,7 +84,7 @@ namespace Hasse.Groups.Heavy{
 			return base.GetHashCode();
 		}
 
-		public SubGroup<T> Generate(int index){
+		public SubGroup<T> Generate(uint index){
 			List<T> elements = new List<T>();
 			T gen = group[index];
 			elements.AddRange(elements);

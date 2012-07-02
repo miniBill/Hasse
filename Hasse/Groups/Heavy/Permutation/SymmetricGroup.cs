@@ -3,22 +3,22 @@ using System.Text;
 
 namespace Hasse.Groups.Heavy.Permutation{
 	public class SymmetricGroup : Group<SymmetricElement>{
-		private int Size{get;set;}
-		private int FullSize{get;set;}
+		private uint Size{get;set;}
+		private uint FullSize{get;set;}
 
-		public SymmetricGroup(int size) : base(Factorial(size)){
+		public SymmetricGroup(uint size) : base(Factorial(size)){
 			Size = size;
 			elements = new SymmetricElement[Order];
-			for(int i = 0; i < FullSize; i++){
-				int[] curr = new int[Size];
-				int curval = i;
-				for(int j = 0; j < Size; j++){
-					int curmod = curval % (Size - j);
+			for(uint i = 0; i < FullSize; i++){
+				uint[] curr = new uint[Size];
+				uint curval = i;
+				for(uint j = 0; j < Size; j++){
+					uint curmod = curval % (Size - j);
 					curval = curval / (Size - j);
-					int val = 0;
+					uint val = 0;
 					while(Contains(curr, j, val))
 							val++;
-					for(int k = 0; k < curmod; k++){
+					for(uint k = 0; k < curmod; k++){
 						val++;
 						while(Contains(curr, j, val))
 							val++;
@@ -29,8 +29,8 @@ namespace Hasse.Groups.Heavy.Permutation{
 			}
 		}
 
-		bool Contains(int[] arr, int maxindex, int value){
-			for(int j = 0; j < maxindex; j++)
+		bool Contains(uint[] arr, uint maxindex, uint value){
+			for(uint j = 0; j < maxindex; j++)
 				if(arr[j] == value)
 					return true;
 			return false;
@@ -38,12 +38,12 @@ namespace Hasse.Groups.Heavy.Permutation{
 
 		SymmetricElement[] elements;
 
-		public override SymmetricElement GetElement(int index){
+		public override SymmetricElement GetElement(uint index){
 			return elements[index];
 		}
 
-		public static int Factorial(int n){
-			int toret = 1;
+		public static uint Factorial(uint n){
+			uint toret = 1;
 			while(n > 1)
 				toret *= n--;
 			return toret;

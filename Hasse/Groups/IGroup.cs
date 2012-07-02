@@ -5,8 +5,8 @@ namespace Hasse.Groups{
 	}
 
 	public interface IGroup<TSub> : IGroup{
-		int Order{get;}
+		uint Order{get;}
 
-		TSub Generate(int index);
+		TSub Generate(uint index);
 	}
 }

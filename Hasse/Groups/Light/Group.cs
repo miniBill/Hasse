@@ -3,21 +3,21 @@ using System.Collections.Generic;
 
 namespace Hasse.Groups.Light{
 	public abstract class Group : IGroup<SubGroup>{
-		private int order;
+		private uint order;
 
-		public int Order{
+		public uint Order{
 			get{
 				return order;
 			}
 		}
 
-		public PowerGroup Power(int power){
+		public PowerGroup Power(uint power){
 			return new PowerGroup(this, power);
 		}
 
-		public SubGroup Generate(int gen){
-			var generated = new List<int>();
-			int curr = 0;
+		public SubGroup Generate(uint gen){
+			var generated = new SortedSet<uint>();
+			uint curr = 0;
 			while(!generated.Contains(curr)){
 				generated.Add(curr);
 				curr = Multiply(curr, gen);
@@ -25,13 +25,13 @@ namespace Hasse.Groups.Light{
 			return new SubGroup(this, generated);
 		}
 
-		public abstract int Multiply(int left, int right);
+		public abstract uint Multiply(uint left, uint right);
 
-		public abstract string ToString(int index);
+		public abstract string ToString(uint index);
 
-		public abstract string ToString(IEnumerable<int> indexes);
+		public abstract string ToString(IEnumerable<uint> indexes);
 
-		public Group(int order){
+		public Group(uint order){
 			this.order = order;
 		}
 	}
