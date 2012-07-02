@@ -27,8 +27,7 @@ namespace Hasse{
 						orderby sizegroup.Key descending
 						select sizegroup;
 				var list = gen.ToList();
-				var wrapped = WrapperFactory.CreateWrapper<Light.SubGroup,int>(list);
-				Process<int, Light.SubGroup>(list/*wrapped*/);
+				Process(list);
 			}
 			if(args[0] == "s" || args[0] == "S"){
 				var @group = (new Heavy.Permutation.SymmetricGroup(Convert.ToInt32(args[1]))).Power(args.Length == 2 ? 1 : Convert.ToInt32(args[2]));
@@ -39,12 +38,11 @@ namespace Hasse{
 						orderby sizegroup.Key descending
 						select sizegroup;
 				var list = gen.ToList();
-				var wrapped = WrapperFactory.CreateWrapper<Heavy.SubGroup<Heavy.Product.PowerElement<Heavy.Permutation.SymmetricElement>>, Heavy.Product.PowerElement<Heavy.Permutation.SymmetricElement>>(list);
-				Process<Heavy.Product.PowerElement<Heavy.Permutation.SymmetricElement>, Heavy.SubGroup<Heavy.Product.PowerElement<Heavy.Permutation.SymmetricElement>>>(list/*wrapped*/);
+				Process(list);
 			}
 		}
 
-		public static void Process<T, U>(IEnumerable<IGrouping<int, U>> genlist) where U : IContainer<T, U>{
+		public static void Process<U>(IEnumerable<IGrouping<int, U>> genlist) where U : IContainer<U>{
 			if(genlist == null)
 				return;
 			Console.WriteLine("  {");

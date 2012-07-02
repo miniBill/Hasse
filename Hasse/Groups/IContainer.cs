@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 namespace Hasse.Groups{
-	public interface IContainer<TElem, TSub> : IEnumerable<TElem>{
+	public interface IContainer<TSub>{
 		bool IsSupersetOf(TSub elements);
 	}
 }

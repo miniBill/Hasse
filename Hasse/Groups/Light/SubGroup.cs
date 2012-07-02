@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Hasse.Groups.Light{
-	public class SubGroup : ISubGroup<SubGroup>, IContainer<int, SubGroup>{
+	public class SubGroup : ISubGroup<SubGroup>, IContainer<SubGroup>{
 		private SortedSet<int> backend = new SortedSet<int>();
 		private Group group;
 
@@ -42,14 +42,6 @@ namespace Hasse.Groups.Light{
 
 		public bool Contains(int element){
 			return backend.Contains(element);
-		}
-
-		public IEnumerator<int> GetEnumerator(){
-			return backend.GetEnumerator();
-		}
-
-		IEnumerator IEnumerable.GetEnumerator(){
-			return GetEnumerator();
 		}
 
 		public bool Equals(SubGroup other){

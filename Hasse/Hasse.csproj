@@ -46,8 +46,6 @@
     <Compile Include="Groups\CalcException.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="Groups\ISubGroup.cs" />
-    <Compile Include="AbstractWrapper.cs" />
-    <Compile Include="WrapperFactory.cs" />
     <Compile Include="Groups\IGroup.cs" />
     <Compile Include="GeneratorFactory.cs" />
     <Compile Include="Groups\Heavy\Permutation\SymmetricGroup.cs" />
