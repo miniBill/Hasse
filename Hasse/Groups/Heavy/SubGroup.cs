@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 namespace Hasse.Groups.Heavy{
-	public class SubGroup<T> : ISubGroup<SubGroup<T>,T> where T : GroupElement<T>{
+	public class SubGroup<T> : ISubGroup<SubGroup<T>>, IContainer<T> where T : GroupElement<T>{
 		private T[] elements;
 
 		public SubGroup(Group<T> group, IEnumerable<T> elements){

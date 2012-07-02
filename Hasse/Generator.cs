@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using Hasse.Groups;
 
 namespace Hasse{
-	public class Generator<T,U> where T : ISubGroup<T,U>, IEquatable<T>{
-		public IGroup<T> Group{get; private set;}
+	public class Generator<TSub> where TSub : ISubGroup<TSub>, IEquatable<TSub>{
+		public IGroup<TSub> Group{get; private set;}
 
-		public Generator(IGroup<T> group){
+		public Generator(IGroup<TSub> group){
 			Group=group;
 		}
 
-		public IEnumerable<T> Generate(){
-			var generated = new NCList<T>();
+		public IEnumerable<TSub> Generate(){
+			var generated = new NCList<TSub>();
 			for(int i = 0; i < Group.Order; i++){
-				T single = Group.Generate(i);
+				TSub single = Group.Generate(i);
 				if(!generated.Contains(single)){
 					generated.Add(single);
 					Generate(generated, single);
@@ -22,10 +22,10 @@ namespace Hasse{
 			return generated;
 		}
 
-		public void Generate(NCList<T> generated, T curr){
+		public void Generate(NCList<TSub> generated, TSub curr){
 			for(int i = 0; i < Group.Order; i++){
 				if(!curr.Contains(i)){
-					T next = curr.Generate(i);
+					TSub next = curr.Generate(i);
 					if(!generated.Contains(next)){
 						generated.Add(next);
 						Generate(generated, next);

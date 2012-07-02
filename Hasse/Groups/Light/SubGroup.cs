@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Hasse.Groups.Light{
-	public class SubGroup : ISubGroup<SubGroup,int>{
+	public class SubGroup : ISubGroup<SubGroup>, IContainer<int>{
 		private List<int> backend = new List<int>();
 		private Group group;
 
@@ -12,7 +12,7 @@ namespace Hasse.Groups.Light{
 			backend.AddRange(elements);
 		}
 
-		public bool Contains(IEnumerable<int> elements){
+		public bool Contains(IEnumerable<int> elements) {
 			foreach(var el in elements)
 				if(!backend.Contains(el))
 					return false;

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Hasse.Groups;
 using Light = Hasse.Groups.Light;
 using Heavy = Hasse.Groups.Heavy;
+using Hasse.Groups.Heavy.Product;
+using Hasse.Groups.Heavy.Permutation;
 
 namespace Hasse{
 	static class Program{
@@ -42,7 +44,7 @@ namespace Hasse{
 			}
 		}
 
-		public static void Process<T>(IEnumerable<IGrouping<int,IISubGroup<T>>> genlist){
+		public static void Process<T>(IEnumerable<IGrouping<int,IContainer<T>>> genlist){
 			if(genlist == null)
 				return;
 			Console.WriteLine("  {");
