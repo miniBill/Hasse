@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 namespace Hasse.Groups.Heavy{
-	public class SubGroup<T> : ISubGroup<SubGroup<T>>, IContainer<T> where T : GroupElement<T>{
+	public class SubGroup<T> : ISubGroup<SubGroup<T>>, IContainer<T, SubGroup<T>> where T : GroupElement<T>{
 		private T[] elements;
 
 		public SubGroup(Group<T> group, IEnumerable<T> elements){
@@ -36,7 +36,7 @@ namespace Hasse.Groups.Heavy{
 			return false;
 		}
 
-		public bool Contains(IEnumerable<T> elements){
+		public bool IsSupersetOf(SubGroup<T> elements){
 			foreach(var el in elements)
 				if(!Contains(el))
 					return false;
@@ -94,7 +94,7 @@ namespace Hasse.Groups.Heavy{
 		}
 
 		public SubGroup<T> Generate(int index){
-			NCList<T> elements = new NCList<T>();
+			List<T> elements = new List<T>();
 			T gen = group[index];
 			elements.AddRange(elements);
 			foreach(var element in elements){

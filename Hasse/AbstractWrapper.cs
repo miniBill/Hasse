@@ -5,19 +5,19 @@ using System.Linq;
 using Hasse.Groups;
 
 namespace Hasse{
-	public class AbstractWrapper<TSub,TElem> : IEnumerable<IGrouping<int,IContainer<TElem>>> where TSub : IContainer<TElem>{
+	public class AbstractWrapper<TSub,TElem> : IEnumerable<IGrouping<int,IContainer<TElem,TSub>>> where TSub : IContainer<TElem, TSub>{
 		private IEnumerable<IGrouping<int,TSub>> list;
 
 		public AbstractWrapper(IEnumerable<IGrouping<int,TSub>> list){
 			this.list = list;
 		}
 
-		public IEnumerator<IGrouping<int, IContainer<TElem>>> GetEnumerator(){
+		public IEnumerator<IGrouping<int, IContainer<TElem, TSub>>> GetEnumerator(){
 			foreach(var el in list)
 				yield return new AbstractGrouping(el);
 		}
 
-		private class AbstractGrouping : IGrouping<int, IContainer<TElem>>{
+		private class AbstractGrouping : IGrouping<int, IContainer<TElem, TSub>>{
 			private IGrouping<int, TSub> wrapped;
 
 			public AbstractGrouping(IGrouping<int, TSub> wrapped){
@@ -30,7 +30,7 @@ namespace Hasse{
 				}
 			}
 
-			public IEnumerator<IContainer<TElem>> GetEnumerator(){
+			public IEnumerator<IContainer<TElem, TSub>> GetEnumerator(){
 				foreach(var el in wrapped)
 					yield return el;
 			}

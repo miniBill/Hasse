@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -50,8 +50,6 @@
     <Compile Include="WrapperFactory.cs" />
     <Compile Include="Groups\IGroup.cs" />
     <Compile Include="GeneratorFactory.cs" />
-    <Compile Include="NCList.cs" />
-    <Compile Include="Groups\IExpableGroup.cs" />
     <Compile Include="Groups\Heavy\Permutation\SymmetricGroup.cs" />
     <Compile Include="Groups\Heavy\Permutation\SymmetricElement.cs" />
     <Compile Include="Groups\Heavy\Product\ProductElement.cs" />

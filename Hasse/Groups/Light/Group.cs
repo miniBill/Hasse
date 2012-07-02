@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 namespace Hasse.Groups.Light{
-	public abstract class Group : IExpableGroup<SubGroup, PowerGroup>{
+	public abstract class Group : IGroup<SubGroup>{
 		private int order;
 
 		public int Order{

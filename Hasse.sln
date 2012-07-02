@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasse", "Hasse\Hasse.csproj", "{FC2C7812-6902-445C-9BA1-C39E9B9E921F}"
 EndProject
 Global
@@ -14,10 +14,10 @@ Global
 		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Release|x86.ActiveCfg = Release|x86
 		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Hasse\Hasse.csproj
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

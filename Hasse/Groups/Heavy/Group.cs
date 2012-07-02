@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Hasse.Groups.Heavy.Product;
 
 namespace Hasse.Groups.Heavy{
-	public abstract class Group<T> : IExpableGroup<SubGroup<T>, PowerGroup<T>> where T : GroupElement<T>{
-		public virtual SubGroup<T> BuildSubgroup(IEnumerable<T> elements){
-			return new SubGroup<T>(this, elements);
+	public abstract class Group<TElem> : IGroup<SubGroup<TElem>> where TElem : GroupElement<TElem>{
+		public virtual SubGroup<TElem> BuildSubgroup(IEnumerable<TElem> elements){
+			return new SubGroup<TElem>(this, elements);
 		}
 
 		public Group(int order){
@@ -14,36 +14,36 @@ namespace Hasse.Groups.Heavy{
 
 		public int Order{get; private set;}
 
-		public static Group<ProductElement<T,T>> operator*(Group<T> left, Group<T> right){
+		public static Group<ProductElement<TElem,TElem>> operator*(Group<TElem> left, Group<TElem> right){
 			return left.Multiply(right);
 		}
 
-		public PowerGroup<T> Power(int power){
-			return new PowerGroup<T>(this, power);
+		public PowerGroup<TElem> Power(int power){
+			return new PowerGroup<TElem>(this, power);
 		}
 
-		public Group<ProductElement<T,V>> Multiply<V>(Group<V> other) where V : GroupElement<V>{
-			return new ProductGroup<T,V>(this, other);
+		public Group<ProductElement<TElem,V>> Multiply<V>(Group<V> other) where V : GroupElement<V>{
+			return new ProductGroup<TElem,V>(this, other);
 		}
 
-		public T this[int index]{
+		public TElem this[int index]{
 			get{
 				return GetElement(index);
 			}
 		}
 
-		public T Unity{
+		public TElem Unity{
 			get{
 				return this[0];
 			}
 		}
 
-		public abstract T GetElement(int index);
+		public abstract TElem GetElement(int index);
 
-		public SubGroup<T> Generate(int index){
-			T gen = GetElement(index);
-			var generated = new NCList<T>();
-			T curr = Unity;
+		public SubGroup<TElem> Generate(int index){
+			TElem gen = GetElement(index);
+			var generated = new List<TElem>();
+			TElem curr = Unity;
 			while(!generated.Contains(curr)){
 				generated.Add(curr);
 				curr *= gen;

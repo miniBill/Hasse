@@ -28,7 +28,7 @@ namespace Hasse{
 						select sizegroup;
 				var list = gen.ToList();
 				var wrapped = WrapperFactory.CreateWrapper<Light.SubGroup,int>(list);
-				Process(wrapped);
+				Process<int, Light.SubGroup>(list/*wrapped*/);
 			}
 			if(args[0] == "s" || args[0] == "S"){
 				var @group = (new Heavy.Permutation.SymmetricGroup(Convert.ToInt32(args[1]))).Power(args.Length == 2 ? 1 : Convert.ToInt32(args[2]));
@@ -40,11 +40,11 @@ namespace Hasse{
 						select sizegroup;
 				var list = gen.ToList();
 				var wrapped = WrapperFactory.CreateWrapper<Heavy.SubGroup<Heavy.Product.PowerElement<Heavy.Permutation.SymmetricElement>>, Heavy.Product.PowerElement<Heavy.Permutation.SymmetricElement>>(list);
-				Process(wrapped);
+				Process<Heavy.Product.PowerElement<Heavy.Permutation.SymmetricElement>, Heavy.SubGroup<Heavy.Product.PowerElement<Heavy.Permutation.SymmetricElement>>>(list/*wrapped*/);
 			}
 		}
 
-		public static void Process<T>(IEnumerable<IGrouping<int,IContainer<T>>> genlist){
+		public static void Process<T, U>(IEnumerable<IGrouping<int, U>> genlist) where U : IContainer<T, U>{
 			if(genlist == null)
 				return;
 			Console.WriteLine("  {");
@@ -71,7 +71,7 @@ namespace Hasse{
 						foreach(var lower in genlist.Where(g => g.Key < size.Key)){
 							int lowitem = 1;
 							foreach(var low in lower){
-								if(sub.Contains(low))
+								if(sub.IsSupersetOf(low))
 									Console.WriteLine("  l{0}i{1} -> l{2}i{3}", size.Key, item, lower.Key, lowitem);
 								lowitem++;
 							}
@@ -81,6 +81,11 @@ namespace Hasse{
 				}
 			}
 			Console.WriteLine("}");
+		}
+
+		public static void AddRange<T>(this SortedSet<T> set, IEnumerable<T> elements){
+			foreach(var element in elements)
+				set.Add(element);
 		}
 	}
 }

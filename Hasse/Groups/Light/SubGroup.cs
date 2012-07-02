@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Hasse.Groups.Light{
-	public class SubGroup : ISubGroup<SubGroup>, IContainer<int>{
-		private List<int> backend = new List<int>();
+	public class SubGroup : ISubGroup<SubGroup>, IContainer<int, SubGroup>{
+		private SortedSet<int> backend = new SortedSet<int>();
 		private Group group;
 
 		public SubGroup(Group group, IEnumerable<int> elements){
@@ -12,11 +12,8 @@ namespace Hasse.Groups.Light{
 			backend.AddRange(elements);
 		}
 
-		public bool Contains(IEnumerable<int> elements) {
-			foreach(var el in elements)
-				if(!backend.Contains(el))
-					return false;
-			return true;
+		public bool IsSupersetOf(SubGroup other) {
+			return backend.IsSupersetOf(other.backend);
 		}
 
 		public int Order{
@@ -26,7 +23,7 @@ namespace Hasse.Groups.Light{
 		}
 
 		public SubGroup Generate(int gen){
-			List<int> elements = new List<int>();
+			SortedSet<int> elements = new SortedSet<int>();
 			elements.AddRange(elements);
 			foreach(var element in backend){
 				int curr = 0;
@@ -56,7 +53,7 @@ namespace Hasse.Groups.Light{
 		}
 
 		public bool Equals(SubGroup other){
-			return Contains(other.backend) && other.Contains(backend);
+			return IsSupersetOf(other) && other.IsSupersetOf(this);
 		}
 
 		public override string ToString(){

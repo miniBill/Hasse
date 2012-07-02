@@ -1,9 +1,12 @@
 using System;
 
 namespace Hasse.Groups{
-	public interface IGroup<T>{
+	public interface IGroup{
+	}
+
+	public interface IGroup<TSub> : IGroup{
 		int Order{get;}
 
-		T Generate(int index);
+		TSub Generate(int index);
 	}
 }
