@@ -18,28 +18,40 @@ namespace Hasse{
 				Console.Error.WriteLine("Ohnoes, needz moar argumentz!");
 				return;
 			}
-			if(args[0] == "z" || args[0] == "Z"){
-				var @group = (new Light.CyclicGroup(Convert.ToUInt32(args[1]))).Power(args.Length == 2 ? 1 : Convert.ToUInt32(args[2]));
-				var g2 = GeneratorFactory.Create(@group);
-				Console.WriteLine("digraph G { ");
-				var gen = from subgroup in g2.Generate()
-						group subgroup by subgroup.Order into sizegroup
-						orderby sizegroup.Key descending
-						select sizegroup;
-				var list = gen.ToList();
-				Process(list);
-			}
-			if(args[0] == "s" || args[0] == "S"){
-				var @group = (new Heavy.Permutation.SymmetricGroup(Convert.ToUInt32(args[1]))).Power(args.Length == 2 ? 1 : Convert.ToUInt32(args[2]));
-				var g2 = GeneratorFactory.Create(@group);
-				Console.WriteLine("digraph G { ");
-				var gen = from subgroup in g2.Generate()
-						group subgroup by subgroup.Order into sizegroup
-						orderby sizegroup.Key descending
-						select sizegroup;
-				var list = gen.ToList();
-				Process(list);
-			}
+			uint size = Convert.ToUInt32(args[1]);
+			if(args[0] == "z" || args[0] == "Z")
+				WorkLight(size, args);
+			if(args[0] == "s" || args[0] == "S")
+				WorkHeavy(size, args);
+		}
+
+		public static void WorkLight(uint size, string[] args){
+			var bgroup = new Light.CyclicGroup(size);
+			Light.Group @group;
+			if(args.Length == 2)
+				@group = bgroup;
+			else
+				@group = bgroup.Power(Convert.ToUInt32(args[2]));
+			var g2 = GeneratorFactory.Create(@group);
+			Console.WriteLine("digraph G { ");
+			var gen = from subgroup in g2.Generate()
+					group subgroup by subgroup.Order into sizegroup
+					orderby sizegroup.Key descending
+					select sizegroup;
+			var list = gen.ToList();
+			Process(list);
+		}
+		
+		public static void WorkHeavy(uint size, string[] args){
+			var @group = new Heavy.Permutation.SymmetricGroup(size);
+			var g2 = GeneratorFactory.Create(@group);
+			Console.WriteLine("digraph G { ");
+			var gen = from subgroup in g2.Generate()
+					group subgroup by subgroup.Order into sizegroup
+					orderby sizegroup.Key descending
+					select sizegroup;
+			var list = gen.ToList();
+			Process(list);
 		}
 
 		public static void Process<U>(IEnumerable<IGrouping<uint, U>> genlist) where U : IContainer<U>{

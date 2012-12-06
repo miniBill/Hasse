@@ -4,12 +4,11 @@ using System.Text;
 namespace Hasse.Groups.Heavy.Permutation{
 	public class SymmetricGroup : Group<SymmetricElement>{
 		private uint Size{get;set;}
-		private uint FullSize{get;set;}
 
 		public SymmetricGroup(uint size) : base(Factorial(size)){
 			Size = size;
 			elements = new SymmetricElement[Order];
-			for(uint i = 0; i < FullSize; i++){
+			for(uint i = 0; i < Order; i++){
 				uint[] curr = new uint[Size];
 				uint curval = i;
 				for(uint j = 0; j < Size; j++){
