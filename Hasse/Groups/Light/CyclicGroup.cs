@@ -1,4 +1,3 @@
-using System;
 using System.Text;
 using System.Collections.Generic;
 
@@ -11,12 +10,12 @@ namespace Hasse.Groups.Light{
 			return (left + right) % Order;
 		}
 
-		public override string ToString(uint index){
+		public virtual string ToString(uint index){
 			return string.Format("{0}_{1}", index, Order);
 		}
 
 		public override string ToString(IEnumerable<uint> indexes){
-			StringBuilder sb = new StringBuilder();
+			var sb = new StringBuilder();
 			sb.Append('{');
 			var enumerator = indexes.GetEnumerator();
 			if(enumerator.MoveNext())

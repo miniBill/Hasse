@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-
 namespace Hasse.Groups{
-	public interface IContainer<TSub>{
+	public interface IContainer<in TSub>{
 		bool IsSupersetOf(TSub elements);
 	}
 }

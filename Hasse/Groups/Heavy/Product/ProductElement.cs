@@ -14,7 +14,7 @@ namespace Hasse.Groups.Heavy.Product{
 			return pobj.Left.Equals(Left) && pobj.Right.Equals(Right);
 		}
 
-		public override ProductElement<U, V> Multiply(ProductElement<U, V> other){
+	    protected override ProductElement<U, V> Multiply(ProductElement<U, V> other){
 			return new ProductElement<U, V>(Left * other.Left, Right * other.Right);
 		}
 

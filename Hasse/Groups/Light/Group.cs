@@ -1,13 +1,12 @@
-using System;
 using System.Collections.Generic;
 
 namespace Hasse.Groups.Light{
 	public abstract class Group : IGroup<SubGroup>{
-		private uint order;
+		private readonly uint _order;
 
 		public uint Order{
 			get{
-				return order;
+				return _order;
 			}
 		}
 
@@ -27,12 +26,10 @@ namespace Hasse.Groups.Light{
 
 		public abstract uint Multiply(uint left, uint right);
 
-		public abstract string ToString(uint index);
+	    public abstract string ToString(IEnumerable<uint> indexes);
 
-		public abstract string ToString(IEnumerable<uint> indexes);
-
-		public Group(uint order){
-			this.order = order;
+	    protected Group(uint order){
+			_order = order;
 		}
 	}
 }

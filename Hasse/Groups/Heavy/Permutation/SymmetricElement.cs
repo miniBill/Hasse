@@ -1,4 +1,3 @@
-using System;
 using System.Text;
 
 namespace Hasse.Groups.Heavy.Permutation{
@@ -9,8 +8,8 @@ namespace Hasse.Groups.Heavy.Permutation{
 			Value = value;
 		}
 
-		public override SymmetricElement Multiply(SymmetricElement other){
-			uint[] res = new uint[Value.Length];
+	    protected override SymmetricElement Multiply(SymmetricElement other){
+			var res = new uint[Value.Length];
 			for(uint i = 0; i < Value.Length; i++)
 				res[i] = other.Value[Value[i]];
 			return new SymmetricElement(res);
@@ -25,16 +24,16 @@ namespace Hasse.Groups.Heavy.Permutation{
 
 		public override int GetHashCode(){
 			int toret = 0;
-			for(int i = 0; i < Value.Length; i++){
-				toret *= Value.Length;
-				toret += (int)Value[i];
+			foreach(uint element in Value) {
+			    toret *= Value.Length;
+			    toret += (int)element;
 			}
 			return toret;
 		}
 
 		public override string ToString(){
-			bool[] done = new bool[Value.Length];
-			StringBuilder sb = new StringBuilder();
+			var done = new bool[Value.Length];
+			var sb = new StringBuilder();
 			for(uint i = 0; i < Value.Length; i++)
 				if(!done[i] && Value[i] != i){
 					sb.Append('(');

@@ -1,95 +1,85 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Hasse.Groups.Heavy{
 	public class SubGroup<T> : ISubGroup<SubGroup<T>>, IContainer<SubGroup<T>> where T : GroupElement<T>{
-		private T[] elements;
+	    public override int GetHashCode() {
+	        unchecked {
+	            return ((_elements != null ? _elements.GetHashCode() : 0) * 397) ^ (_group != null ? _group.GetHashCode() : 0);
+	        }
+	    }
+
+	    public static bool operator ==(SubGroup<T> left, SubGroup<T> right) {
+	        return Equals(left, right);
+	    }
+
+	    public static bool operator !=(SubGroup<T> left, SubGroup<T> right) {
+	        return !Equals(left, right);
+	    }
+
+	    private readonly T[] _elements;
 
 		public SubGroup(Group<T> group, IEnumerable<T> elements){
-			this.elements = elements.ToArray();
-			this.group = group;
+			_elements = elements.ToArray();
+			_group = group;
 		}
 
 		public uint Order{
 			get{
-				return (uint)elements.Length;
+				return (uint)_elements.Length;
 			}
 		}
 
-		private Group<T> group;
+		private readonly Group<T> _group;
 
 		public bool Contains(uint index){
-			T element = group.GetElement(index);
-			foreach(var el in elements)
-				if(el.Equals(element))
-					return true;
-			return false;
+			T element = _group.GetElement(index);
+		    return _elements.Any(el => el.Equals(element));
 		}
 
-		public bool Contains(T element){
-			foreach(var el in elements)
-				if(el.Equals(element))
-					return true;
-			return false;
-		}
+	    private bool Contains(T element) {
+	        return _elements.Any(el => el.Equals(element));
+	    }
 
-		public bool IsSupersetOf(SubGroup<T> elements){
-			foreach(var el in elements.elements)
-				if(!Contains(el))
-					return false;
-			return true;
-		}
+	    public bool IsSupersetOf(SubGroup<T> elements) {
+	        return elements._elements.All(Contains);
+	    }
 
-		public T this[int index]{
-			get{
-				return elements[index];
-			}
-		}
-
-		public override bool Equals(object obj){
-			SubGroup<T> sobj = obj as SubGroup<T>;
+	    public override bool Equals(object obj){
+			var sobj = obj as SubGroup<T>;
 			if(sobj == null)
 				return false;
 			return Equals(sobj);
 		}
 
 		public bool Equals(SubGroup<T> sobj){
-			return Contains(sobj.elements) && sobj.Contains(elements);
+			return Contains(sobj._elements) && sobj.Contains(_elements);
 		}
 
-		public bool Contains(T[] elements){
-			foreach(var el in elements)
-				if(!Contains(el))
-					return false;
-			return true;
-		}
+	    private bool Contains(IEnumerable<T> elements) {
+	        return elements.All(Contains);
+	    }
 
-		public override string ToString(){
-			StringBuilder sb = new StringBuilder();
+	    public override string ToString(){
+			var sb = new StringBuilder();
 			sb.Append('{');
-			if(elements.Length > 0)
-				sb.Append(elements[0]);
+			if(_elements.Length > 0)
+				sb.Append(_elements[0]);
 			for(uint i = 1; i < Order; i++){
 				sb.Append(", ");
-				sb.Append(elements[i]);
+				sb.Append(_elements[i]);
 			}
 			sb.Append('}');
 			return sb.ToString();
 		}
 
-		public override int GetHashCode(){
-			return base.GetHashCode();
-		}
-
 		public SubGroup<T> Generate(uint index){
-			List<T> elements = new List<T>();
-			T gen = group[index];
+			var elements = new List<T>();
+			T gen = _group[index];
 			elements.AddRange(elements);
 			foreach(var element in elements){
-				T curr = group.Unity;
+				T curr = _group.Unity;
 				do{
 					T resr = element * curr;
 					if(!elements.Contains(resr))
@@ -98,9 +88,9 @@ namespace Hasse.Groups.Heavy{
 					if(!elements.Contains(resl))
 						elements.Add(resl);
 					curr *= gen;
-				}while(!curr.Equals(group.Unity));
+				}while(!curr.Equals(_group.Unity));
 			}
-			return group.BuildSubgroup(elements);
+			return _group.BuildSubgroup(elements);
 		}
 	}
 }

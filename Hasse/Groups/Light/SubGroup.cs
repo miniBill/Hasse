@@ -1,52 +1,50 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Hasse.Groups.Light{
 	public class SubGroup : ISubGroup<SubGroup>, IContainer<SubGroup>{
-		private SortedSet<uint> backend = new SortedSet<uint>();
-		private Group group;
+		private readonly SortedSet<uint> _backend = new SortedSet<uint>();
+		private readonly Group _group;
 
 		public SubGroup(Group group, SortedSet<uint> elements){
-			this.group = group;
-			backend = elements;
+			_group = group;
+			_backend = elements;
 		}
 
 		public bool IsSupersetOf(SubGroup other) {
-			return backend.IsSupersetOf(other.backend);
+			return _backend.IsSupersetOf(other._backend);
 		}
 
 		public uint Order{
 			get{
-				return (uint)backend.Count;
+				return (uint)_backend.Count;
 			}
 		}
 
 		public SubGroup Generate(uint gen){
-			SortedSet<uint> elements = new SortedSet<uint>();
+			var elements = new SortedSet<uint>();
 			elements.AddRange(elements);
-			foreach(var element in backend){
+			foreach(var element in _backend){
 				uint curr = 0;
 				do{
-					uint resr = group.Multiply(element,curr);
+					uint resr = _group.Multiply(element,curr);
 					elements.Add(resr);
-					uint resl = group.Multiply(curr,element);
+					uint resl = _group.Multiply(curr,element);
 					elements.Add(resl);
-					curr = group.Multiply(curr, gen);
+					curr = _group.Multiply(curr, gen);
 				}while(curr != 0);
 			}
-			return new SubGroup(group, elements);
+			return new SubGroup(_group, elements);
 		}
 
 		public bool Contains(uint element){
-			return backend.Contains(element);
+			return _backend.Contains(element);
 		}
 
 		public bool Equals(SubGroup other){
-			if(other.backend.Count != backend.Count)
+			if(other._backend.Count != _backend.Count)
 				return false;
-			var els = backend.GetEnumerator();
-			var ots = other.backend.GetEnumerator();
+			var els = _backend.GetEnumerator();
+			var ots = other._backend.GetEnumerator();
 			while(els.MoveNext() && ots.MoveNext())
 				if(els.Current != ots.Current)
 					return false;
@@ -54,7 +52,7 @@ namespace Hasse.Groups.Light{
 		}
 
 		public override string ToString(){
-			return group.ToString(backend);
+			return _group.ToString(_backend);
 		}
 	}
 }

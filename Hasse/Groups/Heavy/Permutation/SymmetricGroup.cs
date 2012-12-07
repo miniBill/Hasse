@@ -1,4 +1,3 @@
-using System;
 using System.Text;
 
 namespace Hasse.Groups.Heavy.Permutation{
@@ -7,9 +6,9 @@ namespace Hasse.Groups.Heavy.Permutation{
 
 		public SymmetricGroup(uint size) : base(Factorial(size)){
 			Size = size;
-			elements = new SymmetricElement[Order];
+			_elements = new SymmetricElement[Order];
 			for(uint i = 0; i < Order; i++){
-				uint[] curr = new uint[Size];
+				var curr = new uint[Size];
 				uint curval = i;
 				for(uint j = 0; j < Size; j++){
 					uint curmod = curval % (Size - j);
@@ -24,7 +23,7 @@ namespace Hasse.Groups.Heavy.Permutation{
 					}
 					curr[j] = val;
 				}
-				elements[i] = new SymmetricElement(curr);
+				_elements[i] = new SymmetricElement(curr);
 			}
 		}
 
@@ -35,13 +34,13 @@ namespace Hasse.Groups.Heavy.Permutation{
 			return false;
 		}
 
-		SymmetricElement[] elements;
+	    readonly SymmetricElement[] _elements;
 
 		public override SymmetricElement GetElement(uint index){
-			return elements[index];
+			return _elements[index];
 		}
 
-		public static uint Factorial(uint n){
+	    private static uint Factorial(uint n){
 			uint toret = 1;
 			while(n > 1)
 				toret *= n--;
@@ -49,13 +48,13 @@ namespace Hasse.Groups.Heavy.Permutation{
 		}
 
 		public override string ToString(){
-			StringBuilder sb = new StringBuilder();
+			var sb = new StringBuilder();
 			sb.Append('{');
-			if(elements.Length > 0)
-				sb.Append(elements[0]);
+			if(_elements.Length > 0)
+				sb.Append(_elements[0]);
 			for(int i = 1; i < Order; i++){
 				sb.Append(", ");
-				sb.Append(elements[i]);
+				sb.Append(_elements[i]);
 			}
 			sb.Append('}');
 			return sb.ToString();

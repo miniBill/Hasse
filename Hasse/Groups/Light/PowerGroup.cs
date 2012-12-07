@@ -1,26 +1,26 @@
 using System;
 
 namespace Hasse.Groups.Light{
-	public class PowerGroup : Group{
-		private Group group;
-		private uint power;
+	public sealed class PowerGroup : Group{
+		private readonly Group _group;
+		private readonly uint _power;
 
 		public PowerGroup(Group group, uint power) : base(MyMath.Pow(group.Order, power)){
-			this.group = group;
-			this.power = power;
+			_group = group;
+			_power = power;
 		}
 
 		public override uint Multiply(uint left, uint right){
 			uint res = 0;
-			uint order = group.Order;
-			for(uint i = 0; i < power; i++){
+			uint order = _group.Order;
+			for(uint i = 0; i < _power; i++){
 				res *= order;
-				res += group.Multiply(left % order, right % order);
+				res += _group.Multiply(left % order, right % order);
 				left /= order;
 				right /= order;
 			}
 			uint toret = 0;
-			for(uint i = 0; i < power; i++){
+			for(uint i = 0; i < _power; i++){
 				toret *= order;
 				toret += res % order;
 				res /= order;
@@ -28,11 +28,7 @@ namespace Hasse.Groups.Light{
 			return toret;
 		}
 
-		public override string ToString(uint index){
-			throw new NotImplementedException();
-		}
-
-		public override string ToString(System.Collections.Generic.IEnumerable<uint> indexes){
+	    public override string ToString(System.Collections.Generic.IEnumerable<uint> indexes){
 			throw new NotImplementedException();
 		}
 	}
