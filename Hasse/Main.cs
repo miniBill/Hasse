@@ -60,9 +60,8 @@ namespace Hasse {
 			Console.WriteLine("  {");
 			Console.WriteLine("    node [shape=plaintext];");
 			var sizeGroups = genlist as IList<IGrouping<uint, TU>> ?? genlist.ToList();
-			foreach(var size in sizeGroups)
-				if(size.Key != 1)
-					Console.Write("\"{0} elementi\" -> ", size.Key);
+			foreach(var size in sizeGroups.Where(size => size.Key != 1))
+				Console.Write("\"{0} elementi\" -> ", size.Key);
 			Console.WriteLine(" \"1 elemento\"");
 			Console.WriteLine("  }");
 			foreach(var size in sizeGroups) {
@@ -70,7 +69,9 @@ namespace Hasse {
 				Console.Write(size.Key);
 				Console.Write(size.Key == 1 ? " elemento\"" : " elementi\"");
 				uint item = 1;
+#pragma warning disable 168
 				foreach(var sub in size)
+#pragma warning restore 168
 					Console.Write("; l{0}i{1}", size.Key, item++);
 				Console.WriteLine("; }");
 				if(size.Key > 1) {
