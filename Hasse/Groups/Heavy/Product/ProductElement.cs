@@ -1,37 +1,41 @@
 namespace Hasse.Groups.Heavy.Product {
-    public class ProductElement<TLeft, TRight> : GroupElement<ProductElement<TLeft, TRight>>
-        where TLeft : GroupElement<TLeft>
-        where TRight : GroupElement<TRight> {
+	public class ProductElement<TLeft, TRight> : GroupElement<ProductElement<TLeft, TRight>>
+		where TLeft : GroupElement<TLeft>
+		where TRight : GroupElement<TRight> {
 
-        private TLeft Left {
-            get;
-            set;
-        }
+		private TLeft Left {
+			get;
+			set;
+		}
 
-        private TRight Right {
-            get;
-            set;
-        }
+		private TRight Right {
+			get;
+			set;
+		}
 
-        public ProductElement(TLeft left, TRight right) {
-            Left = left;
-            Right = right;
-        }
+		public ProductElement(TLeft left, TRight right) {
+			Left = left;
+			Right = right;
+		}
 
-        public override bool Equals(ProductElement<TLeft, TRight> pobj) {
-            return pobj.Left.Equals(Left) && pobj.Right.Equals(Right);
-        }
+		public override int Compare(ProductElement<TLeft, TRight> other) {
+			return 0;
+		}
 
-        protected override ProductElement<TLeft, TRight> Multiply(ProductElement<TLeft, TRight> other) {
-            return new ProductElement<TLeft, TRight>(Left * other.Left, Right * other.Right);
-        }
+		public override bool Equals(ProductElement<TLeft, TRight> pobj) {
+			return pobj.Left.Equals(Left) && pobj.Right.Equals(Right);
+		}
 
-        public override int GetHashCode() {
-            return Left.GetHashCode() + Right.GetHashCode();
-        }
+		protected override ProductElement<TLeft, TRight> Multiply(ProductElement<TLeft, TRight> other) {
+			return new ProductElement<TLeft, TRight>(Left * other.Left, Right * other.Right);
+		}
 
-        public override string ToString() {
-            return string.Format("({0},{1})", Left, Right);
-        }
-    }
+		public override int GetHashCode() {
+			return Left.GetHashCode() + Right.GetHashCode();
+		}
+
+		public override string ToString() {
+			return string.Format("({0},{1})", Left, Right);
+		}
+	}
 }

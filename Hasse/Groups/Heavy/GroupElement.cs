@@ -1,14 +1,16 @@
 using System;
 
-namespace Hasse.Groups.Heavy{
-	public abstract class GroupElement<T> : IEquatable<T> where T : class{
-	    protected abstract T Multiply(T other);
+namespace Hasse.Groups.Heavy {
+	public abstract class GroupElement<T> : IEquatable<T> where T : class {
+		protected abstract T Multiply(T other);
 
-		public static T operator*(GroupElement<T> left, T right){
+		public static T operator *(GroupElement<T> left, T right) {
 			return left.Multiply(right);
 		}
 
-		sealed public override bool Equals(object obj){
+		public abstract int Compare(T other);
+
+		sealed public override bool Equals(object obj) {
 			var tobj = obj as T;
 			if(tobj == null)
 				return false;
