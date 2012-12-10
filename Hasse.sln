@@ -1,23 +1,45 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasse", "Hasse\Hasse.csproj", "{FC2C7812-6902-445C-9BA1-C39E9B9E921F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HasseTest", "HasseTest\HasseTest.csproj", "{E7597CC7-1AAB-40DC-8810-6197C161B59D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Debug|x86.ActiveCfg = Debug|x86
-		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Debug|x86.Build.0 = Debug|x86
-		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Release|x86.ActiveCfg = Release|x86
-		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Release|x86.Build.0 = Release|x86
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Hasse\Hasse.csproj
+		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FC2C7812-6902-445C-9BA1-C39E9B9E921F}.Release|x86.ActiveCfg = Release|Any CPU
+		{E7597CC7-1AAB-40DC-8810-6197C161B59D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7597CC7-1AAB-40DC-8810-6197C161B59D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7597CC7-1AAB-40DC-8810-6197C161B59D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E7597CC7-1AAB-40DC-8810-6197C161B59D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E7597CC7-1AAB-40DC-8810-6197C161B59D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E7597CC7-1AAB-40DC-8810-6197C161B59D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7597CC7-1AAB-40DC-8810-6197C161B59D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7597CC7-1AAB-40DC-8810-6197C161B59D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E7597CC7-1AAB-40DC-8810-6197C161B59D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E7597CC7-1AAB-40DC-8810-6197C161B59D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Hasse\Hasse.csproj
 	EndGlobalSection
 EndGlobal

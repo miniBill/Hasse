@@ -4,9 +4,9 @@ using Hasse.Groups;
 
 namespace Hasse {
     public class Generator<TSub> where TSub : ISubGroup<TSub>, IEquatable<TSub> {
-        public IGroup<TSub> Group {
+        private IGroup<TSub> Group {
             get;
-            private set;
+            set;
         }
 
         public Generator(IGroup<TSub> group) {
@@ -25,7 +25,7 @@ namespace Hasse {
             return generated;
         }
 
-        public void Generate(List<TSub> generated, TSub curr) {
+        private void Generate(List<TSub> generated, TSub curr) {
             for(uint i = 0; i < Group.Order; i++) {
                 if(!curr.Contains(i)) {
                     TSub next = curr.Generate(i);

@@ -1,29 +1,37 @@
-using System;
+namespace Hasse.Groups.Heavy.Product {
+    public class ProductElement<TLeft, TRight> : GroupElement<ProductElement<TLeft, TRight>>
+        where TLeft : GroupElement<TLeft>
+        where TRight : GroupElement<TRight> {
 
-namespace Hasse.Groups.Heavy.Product{
-	public class ProductElement<U,V> : GroupElement<ProductElement<U,V>> where U : GroupElement<U> where V : GroupElement<V>{
-		public U Left{get; private set;}
-		public V Right{get; private set;}
+        private TLeft Left {
+            get;
+            set;
+        }
 
-		public ProductElement(U left, V right){
-			Left = left;
-			Right = right;
-		}
+        private TRight Right {
+            get;
+            set;
+        }
 
-		public override bool Equals(ProductElement<U,V> pobj){
-			return pobj.Left.Equals(Left) && pobj.Right.Equals(Right);
-		}
+        public ProductElement(TLeft left, TRight right) {
+            Left = left;
+            Right = right;
+        }
 
-	    protected override ProductElement<U, V> Multiply(ProductElement<U, V> other){
-			return new ProductElement<U, V>(Left * other.Left, Right * other.Right);
-		}
+        public override bool Equals(ProductElement<TLeft, TRight> pobj) {
+            return pobj.Left.Equals(Left) && pobj.Right.Equals(Right);
+        }
 
-		public override int GetHashCode(){
-			return Left.GetHashCode() + Right.GetHashCode();
-		}
+        protected override ProductElement<TLeft, TRight> Multiply(ProductElement<TLeft, TRight> other) {
+            return new ProductElement<TLeft, TRight>(Left * other.Left, Right * other.Right);
+        }
 
-		public override string ToString(){
-			return string.Format("({0},{1})", Left, Right);
-		}
-	}
+        public override int GetHashCode() {
+            return Left.GetHashCode() + Right.GetHashCode();
+        }
+
+        public override string ToString() {
+            return string.Format("({0},{1})", Left, Right);
+        }
+    }
 }

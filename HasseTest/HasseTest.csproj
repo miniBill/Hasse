@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>8250839d-5214-4fd6-a91a-2c6b098d0eff</ProjectGuid>
+    <ProjectGuid>{E7597CC7-1AAB-40DC-8810-6197C161B59D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HasseTest</RootNamespace>
@@ -50,8 +50,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="MyMathTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Groups\Heavy\Permutation\CyclicGroupTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hasse\Hasse.csproj">
+      <Project>{fc2c7812-6902-445c-9ba1-c39e9b9e921f}</Project>
+      <Name>Hasse</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Hasse.Groups.Heavy.Product {
     public class PowerGroup<T> : Group<PowerElement<T>> where T : GroupElement<T> {
         private Group<T> Group {
@@ -34,6 +36,10 @@ namespace Hasse.Groups.Heavy.Product {
 
         public override string ToString() {
             return string.Format("{0}^{1}", Group, Power);
+        }
+
+        public override System.Collections.Generic.IEnumerator<PowerElement<T>> GetEnumerator() {
+            return _elements.AsEnumerable().GetEnumerator();
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Text;
 using System.Collections.Generic;
 
 namespace Hasse.Groups.Light{
-	public class CyclicGroup : Group{
+	public sealed class CyclicGroup : Group{
 		public CyclicGroup(uint order) : base(order){
 		}
 
@@ -10,7 +10,7 @@ namespace Hasse.Groups.Light{
 			return (left + right) % Order;
 		}
 
-		public virtual string ToString(uint index){
+		public string ToString(uint index){
 			return string.Format("{0}_{1}", index, Order);
 		}
 

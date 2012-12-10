@@ -1,10 +1,12 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Hasse.Groups.Heavy.Permutation{
 	public class SymmetricGroup : Group<SymmetricElement>{
 		private uint Size{get;set;}
 
-		public SymmetricGroup(uint size) : base(Factorial(size)){
+		public SymmetricGroup(uint size) : base(MyMath.Factorial(size)){
 			Size = size;
 			_elements = new SymmetricElement[Order];
 			for(uint i = 0; i < Order; i++){
@@ -40,14 +42,7 @@ namespace Hasse.Groups.Heavy.Permutation{
 			return _elements[index];
 		}
 
-	    private static uint Factorial(uint n){
-			uint toret = 1;
-			while(n > 1)
-				toret *= n--;
-			return toret;
-		}
-
-		public override string ToString(){
+	    public override string ToString(){
 			var sb = new StringBuilder();
 			sb.Append('{');
 			if(_elements.Length > 0)
@@ -59,6 +54,10 @@ namespace Hasse.Groups.Heavy.Permutation{
 			sb.Append('}');
 			return sb.ToString();
 		}
-	}
+
+        public override IEnumerator<SymmetricElement> GetEnumerator() {
+            return _elements.AsEnumerable().GetEnumerator();
+        }
+    }
 }
 

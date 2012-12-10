@@ -2,7 +2,7 @@ using Heavy = Hasse.Groups.Heavy;
 using Light = Hasse.Groups.Light;
 
 namespace Hasse {
-    public class GeneratorFactory {
+    public static class GeneratorFactory {
         public static Generator<Light.SubGroup> Create(Light.Group group) {
             return new Generator<Light.SubGroup>(group);
         }

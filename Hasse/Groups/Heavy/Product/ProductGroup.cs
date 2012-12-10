@@ -1,21 +1,31 @@
-namespace Hasse.Groups.Heavy.Product{
-	public sealed class ProductGroup<TU,TV> : Group<ProductElement<TU,TV>> where TU : GroupElement<TU> where TV : GroupElement<TV>{
-		public ProductGroup(Group<TU> left, Group<TV> right) : base(left.Order * right.Order) {
-			_elements = new ProductElement<TU, TV>[Order];
-			for(uint i = 0; i < left.Order; i++)
-				for(uint j = 0; j < right.Order; j++)
-					_elements[i * right.Order + j] = Multiply(left[i], right[j]);
-		}
+using System.Collections.Generic;
+using System.Linq;
 
-	    private ProductElement<TU,TV> Multiply(TU left, TV right){
-			return new ProductElement<TU,TV>(left, right);
-		}
+namespace Hasse.Groups.Heavy.Product {
+    public sealed class ProductGroup<TLeft, TRight> : Group<ProductElement<TLeft, TRight>>
+        where TLeft : GroupElement<TLeft>
+        where TRight : GroupElement<TRight> {
+        public ProductGroup(Group<TLeft> left, Group<TRight> right)
+            : base(left.Order * right.Order) {
+            _elements = new ProductElement<TLeft, TRight>[Order];
+            for(uint i = 0; i < left.Order; i++)
+                for(uint j = 0; j < right.Order; j++)
+                    _elements[i * right.Order + j] = Multiply(left[i], right[j]);
+        }
 
-	    readonly ProductElement<TU,TV>[] _elements;
+        private ProductElement<TLeft, TRight> Multiply(TLeft left, TRight right) {
+            return new ProductElement<TLeft, TRight>(left, right);
+        }
 
-		public override ProductElement<TU, TV> GetElement(uint index){
-			return _elements[index];
-		}
-	}
+        readonly ProductElement<TLeft, TRight>[] _elements;
+
+        public override ProductElement<TLeft, TRight> GetElement(uint index) {
+            return _elements[index];
+        }
+
+        public override IEnumerator<ProductElement<TLeft, TRight>> GetEnumerator() {
+            return _elements.AsEnumerable().GetEnumerator();
+        }
+    }
 }
 

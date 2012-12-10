@@ -1,5 +1,3 @@
-using System;
-
 namespace Hasse{
 	public static class MyMath{
 		public static uint Pow(uint x, uint exp){
@@ -15,5 +13,12 @@ namespace Hasse{
 			}
 			return result;
 		}
+
+	    public static uint Factorial(uint n){
+	        uint toret = 1;
+	        while(n > 1)
+	            toret *= n--;
+	        return toret;
+	    }
 	}
 }
