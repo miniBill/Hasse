@@ -20,14 +20,14 @@ namespace Hasse {
 			if(args[0] == "z" || args[0] == "Z")
 				WorkLight(size, args);
 			if(args[0] == "s" || args[0] == "S")
-				WorkHeavy(size);
+				WorkHeavy(size, args);
 			Console.ReadKey();
 		}
 
-		private static void WorkLight(uint size, string[] args) {
+		private static void WorkLight(uint size, IList<string> args) {
 			var bgroup = new Light.CyclicGroup(size);
 			Light.Group @group;
-			if(args.Length == 2)
+			if(args.Count == 2)
 				@group = bgroup;
 			else
 				@group = bgroup.Power(Convert.ToUInt32(args[2]));
@@ -41,8 +41,9 @@ namespace Hasse {
 			Process(list);
 		}
 
-		private static void WorkHeavy(uint size) {
-			var @group = new Heavy.Permutation.SymmetricGroup(size);
+		private static void WorkHeavy(uint size, IList<string> args) {
+			var bgroup = new Heavy.Permutation.SymmetricGroup(size);
+			var @group = bgroup.Power(args.Count > 2 ? Convert.ToUInt32(args[2]) : 1);
 			var g2 = GeneratorFactory.Create(@group);
 			Console.WriteLine("digraph G { ");
 			var gen = from subgroup in g2.Generate()
