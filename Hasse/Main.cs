@@ -6,9 +6,9 @@ using Light = Hasse.Groups.Light;
 using Heavy = Hasse.Groups.Heavy;
 using Hasse.Groups.Heavy.Permutation;
 
-namespace Hasse {
-	static class Program {
-		public static void Main(string[] args) {
+namespace Hasse{
+	static class Program{
+		public static void Main(string[] args){
 			Work(args);
 		}
 
@@ -19,10 +19,10 @@ namespace Hasse {
 				BeHappy();
 				return;
 			}
-			uint size = Convert.ToUInt32(args [1]);
-			if(args [0] == "z" || args [0] == "Z")
+			uint size = Convert.ToUInt32(args[1]);
+			if(args[0] == "z" || args[0] == "Z")
 				WorkLight(size, args);
-			if(args [0] == "s" || args [0] == "S")
+			if(args[0] == "s" || args[0] == "S")
 				WorkHeavy(size, args);
 		}
 
@@ -30,7 +30,7 @@ namespace Hasse {
 			"id = <()>", "<(1 3)>", "S_3 = <(1 2), (1 2 3)>",
 			"<(1 2), (3 4)>", "Z_4 = <(1 2 3 4)>",
 			"<(1 2)(3 4)>", "V = <(1 2)(3 4), (1 4)(2 3)>",
-			"Z_3 = <(1 2 3)>", "D_8 = <(1 2 3 4),(2 4)>",
+			"A_3 = <(1 2 3)>", "D_8 = <(1 2 3 4),(2 4)>",
 			"A_4 = <(1 2)(3 4),(1 2 3)>", "S_4 = <(1 2),(1 3),(1 4),(2 3),(2 4),(3 4)>"
 		};
 
@@ -42,15 +42,23 @@ namespace Hasse {
 			var represent /* CUBA! */ = conj.Select(rep => s4.ParseSubGroup(rep));
 			foreach(var subgroup in represent)
 				Console.WriteLine(subgroup);
+			Console.WriteLine("===");
+			var generator = GeneratorFactory.Create(s4);
+			var subgroups = generator.Generate();
+			foreach(var subgroup in subgroups)
+				if(!represent.Contains(subgroup))
+					foreach(var element in s4)
+						if(represent.Contains(subgroup ^ element))
+							Console.WriteLine("{0}: {1}", subgroup.FindGeneratorString(), element);
 		}
 
-		private static void WorkLight(uint size, IList<string> args) {
+		private static void WorkLight(uint size, IList<string> args){
 			var bgroup = new Light.CyclicGroup(size);
 			Light.Group @group;
 			if(args.Count == 2)
-				@group = bgroup;
+					@group = bgroup;
 			else
-				@group = bgroup.Power(Convert.ToUInt32(args[2]));
+					@group = bgroup.Power(Convert.ToUInt32(args[2]));
 			var g2 = GeneratorFactory.Create(@group);
 			Console.WriteLine("digraph G { ");
 			var gen = from subgroup in g2.Generate()
@@ -61,7 +69,7 @@ namespace Hasse {
 			Process(list);
 		}
 
-		private static void WorkHeavy(uint size, IList<string> args) {
+		private static void WorkHeavy(uint size, IList<string> args){
 			var bgroup = new Heavy.Permutation.SymmetricGroup(size);
 			var @group = bgroup.Power(args.Count > 2 ? Convert.ToUInt32(args[2]) : 1);
 			var g2 = GeneratorFactory.Create(@group);
@@ -74,7 +82,7 @@ namespace Hasse {
 			Process(list);
 		}
 
-		private static void Process<TU>(IEnumerable<IGrouping<uint, TU>> genlist) where TU : IContainer<TU> {
+		private static void Process<TU>(IEnumerable<IGrouping<uint, TU>> genlist) where TU : IContainer<TU>{
 			if(genlist == null)
 				return;
 			Console.WriteLine("  {");
@@ -84,7 +92,7 @@ namespace Hasse {
 				Console.Write("\"{0} elementi\" -> ", size.Key);
 			Console.WriteLine(" \"1 elemento\"");
 			Console.WriteLine("  }");
-			foreach(var size in sizeGroups) {
+			foreach(var size in sizeGroups){
 				Console.Write("  { rank = same; \"");
 				Console.Write(size.Key);
 				Console.Write(size.Key == 1 ? " elemento\"" : " elementi\"");
@@ -94,13 +102,13 @@ namespace Hasse {
 #pragma warning restore 168
 					Console.Write("; l{0}i{1}", size.Key, item++);
 				Console.WriteLine("; }");
-				if(size.Key > 1) {
+				if(size.Key > 1){
 					item = 1;
-					foreach(var sub in size) {
+					foreach(var sub in size){
 						IGrouping<uint, TU> size1 = size;
-						foreach(var lower in sizeGroups.Where(g => g.Key < size1.Key)) {
+						foreach(var lower in sizeGroups.Where(g => g.Key < size1.Key)){
 							uint lowitem = 1;
-							foreach(var low in lower) {
+							foreach(var low in lower){
 								if(sub.IsSupersetOf(low))
 									Console.WriteLine("  l{0}i{1} -> l{2}i{3}", size.Key, item, lower.Key, lowitem);
 								lowitem++;
@@ -113,7 +121,7 @@ namespace Hasse {
 			Console.WriteLine("}");
 		}
 
-		public static void AddRange<T>(this SortedSet<T> set, IEnumerable<T> elements) {
+		public static void AddRange<T>(this SortedSet<T> set, IEnumerable<T> elements){
 			foreach(var element in elements)
 				set.Add(element);
 		}

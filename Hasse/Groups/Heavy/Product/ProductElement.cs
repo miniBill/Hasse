@@ -2,7 +2,6 @@ namespace Hasse.Groups.Heavy.Product {
 	public class ProductElement<TLeft, TRight> : GroupElement<ProductElement<TLeft, TRight>>
 		where TLeft : GroupElement<TLeft>
 		where TRight : GroupElement<TRight> {
-
 		private TLeft Left {
 			get;
 			set;
@@ -36,6 +35,10 @@ namespace Hasse.Groups.Heavy.Product {
 
 		public override string ToString() {
 			return string.Format("({0},{1})", Left, Right);
+		}
+
+		public override GroupElement<ProductElement<TLeft, TRight>> Inverse(){
+			return new ProductElement<TLeft,TRight>(Left.Inverse().Explode(), Right.Inverse().Explode());
 		}
 	}
 }

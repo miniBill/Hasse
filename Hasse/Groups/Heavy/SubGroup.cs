@@ -105,6 +105,17 @@ namespace Hasse.Groups.Heavy {
 			return Group.BuildSubgroup(elements);
 		}
 
+		public static SubGroup<T> operator ^(SubGroup<T> subgroup, T element){
+			T[] toret = new T[subgroup.Order];
+			for(int i = 0; i < toret.Length; i++)
+				toret[i] = subgroup._elements[i] ^ element;
+			return new Hasse.Groups.Heavy.SubGroup<T>(subgroup.Group, toret);
+		}
+
+		public string FindGeneratorString(){
+			return ToString();
+		}
+
 		protected List<T> GenerateElements(T element){
 			var elements = new List<T>();
 			elements.AddRange(_elements);

@@ -7,8 +7,7 @@ namespace Hasse.Groups.Heavy.Permutation {
 			get;
 			set;
 		}
-
-		public SymmetricElement(uint[] value) {
+		public SymmetricElement(uint[] value){
 			Value = value;
 		}
 
@@ -103,6 +102,13 @@ namespace Hasse.Groups.Heavy.Permutation {
 				return "()";
 			//sb.AppendFormat(" CC:{0} CL:{1}", CyclicCount, CyclicLength);
 			return sb.ToString();
+		}
+
+		public override GroupElement<SymmetricElement> Inverse(){
+			uint[] toret = new uint[Value.Length];
+			for(uint i = 0; i < Value.Length; i++)
+				toret[Value[i]] = i;
+			return new SymmetricElement(toret);
 		}
 	}
 }
