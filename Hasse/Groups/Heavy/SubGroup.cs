@@ -113,7 +113,11 @@ namespace Hasse.Groups.Heavy {
 		}
 
 		public string FindGeneratorString(){
-			return ToString();
+			for(int i = 1;; i++){
+				var indexes = new uint[i];
+				for(int j=0; j<Order; j++)
+					return ToString();
+			}
 		}
 
 		protected List<T> GenerateElements(T element){

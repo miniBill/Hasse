@@ -11,11 +11,15 @@ namespace Hasse.Groups.Heavy.Permutation {
 			Value = value;
 		}
 
-		protected override SymmetricElement Multiply(SymmetricElement other) {
+		protected override SymmetricElement Multiply(SymmetricElement other){
 			var res = new uint[Value.Length];
 			for(uint i = 0; i < Value.Length; i++)
 				res[i] = other.Value[Value[i]];
 			return new SymmetricElement(res);
+		}
+
+		public string ToLaTeX(){
+			return ToString().Replace(" ", "\\,");
 		}
 
 		public override int Compare(SymmetricElement other) {

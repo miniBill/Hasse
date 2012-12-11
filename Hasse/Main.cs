@@ -39,17 +39,18 @@ namespace Hasse{
 		/// </summary>
 		private static void BeHappy(){
 			var s4 = new SymmetricGroup(4);
-			var represent /* CUBA! */ = conj.Select(rep => s4.ParseSubGroup(rep));
-			foreach(var subgroup in represent)
+			var represent /* CUBA! */ = conj.Select(s4.ParseSubGroup);
+			var representArray = represent.ToArray();
+			foreach(var subgroup in representArray)
 				Console.WriteLine(subgroup);
 			Console.WriteLine("===");
 			var generator = GeneratorFactory.Create(s4);
 			var subgroups = generator.Generate();
 			foreach(var subgroup in subgroups)
-				if(!represent.Contains(subgroup))
-					foreach(var element in s4)
-						if(represent.Contains(subgroup ^ element))
-							Console.WriteLine("{0}: {1}", subgroup.FindGeneratorString(), element);
+				if(!representArray.Contains(subgroup)){
+					var result = s4.Where(element => representArray.Contains(subgroup ^ element)).First();
+					Console.WriteLine("{0}: {1}", subgroup.FindGeneratorString(), result.ToLaTeX());
+				}
 		}
 
 		private static void WorkLight(uint size, IList<string> args){
