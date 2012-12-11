@@ -48,9 +48,7 @@ namespace Hasse.Groups.Heavy.Permutation{
 			var generators = generatorString.Split(',').Select(gen => gen.Trim());
 			var parsedGenerators = generators.Select(gen => ParseElement(gen));
 			var toret = new NamedSubGroup<SymmetricElement>(name, this, new SymmetricElement[0]);
-			foreach(var parsedGenerator in parsedGenerators)
-				toret = toret.Generate(parsedGenerator);
-			return toret;
+			return parsedGenerators.Aggregate(toret, (curr,parsedGenerator) => curr.Generate(parsedGenerator));
 		}
 
 		private SymmetricElement ParseElement(string input){

@@ -107,8 +107,8 @@ namespace Hasse.Groups.Heavy {
 
 		protected List<T> GenerateElements(T element){
 			var elements = new List<T>();
-			elements.Add(element);
 			elements.AddRange(_elements);
+			elements.AddIfNotContained(element);
 			bool changed;
 			do{
 				var snapshot = elements.ToArray();
