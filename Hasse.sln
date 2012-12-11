@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasse", "Hasse\Hasse.csproj", "{FC2C7812-6902-445C-9BA1-C39E9B9E921F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HasseTest", "HasseTest\HasseTest.csproj", "{E7597CC7-1AAB-40DC-8810-6197C161B59D}"

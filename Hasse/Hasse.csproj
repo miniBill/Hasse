@@ -1,15 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FC2C7812-6902-445C-9BA1-C39E9B9E921F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Hasse</RootNamespace>
     <AssemblyName>Hasse</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <StartupObject>Hasse.Program</StartupObject>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -63,6 +62,7 @@
     <Compile Include="MyExtensions.cs" />
     <Compile Include="MyMath.cs" />
     <Compile Include="Groups\IContainer.cs" />
+    <Compile Include="Groups\Heavy\NamedSubGroup.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
@@ -72,7 +72,7 @@
         <Policies>
           <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
           <TextStylePolicy FileWidth="120" TabWidth="4" RemoveTrailingWhitespace="True" inheritsSet="Mono" inheritsScope="text/plain" scope="text/x-csharp" />
-          <CSharpFormattingPolicy NamespaceBraceStyle="EndOfLineWithoutSpace" ClassBraceStyle="EndOfLineWithoutSpace" InterfaceBraceStyle="EndOfLineWithoutSpace" StructBraceStyle="EndOfLineWithoutSpace" EnumBraceStyle="EndOfLineWithoutSpace" MethodBraceStyle="EndOfLineWithoutSpace" AnonymousMethodBraceStyle="EndOfLineWithoutSpace" ConstructorBraceStyle="EndOfLineWithoutSpace" DestructorBraceStyle="EndOfLineWithoutSpace" PropertyBraceStyle="EndOfLineWithoutSpace" PropertyGetBraceStyle="EndOfLineWithoutSpace" PropertySetBraceStyle="EndOfLineWithoutSpace" AllowPropertyGetBlockInline="False" AllowPropertySetBlockInline="False" EventBraceStyle="EndOfLineWithoutSpace" EventAddBraceStyle="EndOfLineWithoutSpace" EventRemoveBraceStyle="EndOfLineWithoutSpace" AllowEventAddBlockInline="False" AllowEventRemoveBlockInline="False" StatementBraceStyle="EndOfLineWithoutSpace" IfElseBraceForcement="RemoveBraces" ForBraceForcement="RemoveBraces" ForEachBraceForcement="RemoveBraces" WhileBraceForcement="RemoveBraces" UsingBraceForcement="RemoveBraces" FixedBraceForcement="RemoveBraces" PlaceElseOnNewLine="True" PlaceElseIfOnNewLine="True" PlaceCatchOnNewLine="True" PlaceFinallyOnNewLine="True" BeforeMethodDeclarationParentheses="False" BeforeMethodCallParentheses="False" BeforeConstructorDeclarationParentheses="False" BeforeDelegateDeclarationParentheses="False" NewParentheses="False" IfParentheses="False" WhileParentheses="False" ForParentheses="False" ForeachParentheses="False" CatchParentheses="False" SwitchParentheses="False" LockParentheses="False" UsingParentheses="False" inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
+          <CSharpFormattingPolicy NamespaceBraceStyle="EndOfLineWithoutSpace" ClassBraceStyle="EndOfLineWithoutSpace" InterfaceBraceStyle="EndOfLineWithoutSpace" StructBraceStyle="EndOfLineWithoutSpace" EnumBraceStyle="EndOfLineWithoutSpace" MethodBraceStyle="EndOfLineWithoutSpace" AnonymousMethodBraceStyle="EndOfLineWithoutSpace" ConstructorBraceStyle="EndOfLineWithoutSpace" DestructorBraceStyle="EndOfLineWithoutSpace" PropertyBraceStyle="EndOfLineWithoutSpace" PropertyGetBraceStyle="EndOfLineWithoutSpace" PropertySetBraceStyle="EndOfLineWithoutSpace" AllowPropertyGetBlockInline="False" AllowPropertySetBlockInline="False" EventBraceStyle="EndOfLineWithoutSpace" EventAddBraceStyle="EndOfLineWithoutSpace" EventRemoveBraceStyle="EndOfLineWithoutSpace" AllowEventAddBlockInline="False" AllowEventRemoveBlockInline="False" StatementBraceStyle="EndOfLineWithoutSpace" IfElseBraceForcement="RemoveBraces" ForBraceForcement="RemoveBraces" ForEachBraceForcement="RemoveBraces" WhileBraceForcement="RemoveBraces" UsingBraceForcement="RemoveBraces" FixedBraceForcement="RemoveBraces" PlaceElseOnNewLine="True" PlaceElseIfOnNewLine="True" PlaceCatchOnNewLine="True" PlaceFinallyOnNewLine="True" BeforeMethodDeclarationParentheses="False" BeforeMethodCallParentheses="False" BeforeConstructorDeclarationParentheses="False" BeforeDelegateDeclarationParentheses="False" NewParentheses="False" IfParentheses="False" WhileParentheses="False" ForParentheses="False" ForeachParentheses="False" CatchParentheses="False" SwitchParentheses="False" LockParentheses="False" UsingParentheses="False" SpacesBeforeBrackets="False" inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
           <TextStylePolicy FileWidth="120" TabWidth="4" inheritsSet="Mono" inheritsScope="text/plain" scope="text/plain" />
         </Policies>
       </Properties>

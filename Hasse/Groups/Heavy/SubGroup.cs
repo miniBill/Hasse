@@ -5,10 +5,13 @@ using System.Text;
 
 namespace Hasse.Groups.Heavy {
 	public class SubGroup<T> : ISubGroup<SubGroup<T>>, IContainer<SubGroup<T>> where T : GroupElement<T> {
-		public override int GetHashCode() {
-			unchecked {
-				return ((_elements != null ? _elements.GetHashCode() : 0) * 397) ^ (_group != null ? _group.GetHashCode() : 0);
-			}
+		public override int GetHashCode(){
+			unchecked{
+			return ((_elements != null ? _elements.GetHashCode() : 0) * 397) ^ (Group != null ? Group.GetHashCode() : 0);}}
+
+		protected Group<T> Group{
+			get;
+			private set;
 		}
 
 		public static bool operator ==(SubGroup<T> left, SubGroup<T> right) {
@@ -23,7 +26,7 @@ namespace Hasse.Groups.Heavy {
 
 		public SubGroup(Group<T> group, IEnumerable<T> elements) {
 			_elements = elements.ToArray();
-			_group = group;
+			Group = group;
 		}
 
 		public uint Order {
@@ -32,10 +35,8 @@ namespace Hasse.Groups.Heavy {
 			}
 		}
 
-		private readonly Group<T> _group;
-
 		public bool Contains(uint index) {
-			T element = _group.GetElement(index);
+			T element = Group.GetElement(index);
 			return _elements.Any(el => el.Equals(element));
 		}
 
@@ -94,20 +95,29 @@ namespace Hasse.Groups.Heavy {
 			return left.Compare(right);
 		}
 
-		public SubGroup<T> Generate(uint index) {
+		public SubGroup<T> Generate(uint index){
+			T gen = Group[index];
+			return Generate(gen);
+		}
+
+		public SubGroup<T> Generate(T element){
+			var elements = GenerateElements(element);
+			return Group.BuildSubgroup(elements);
+		}
+
+		protected List<T> GenerateElements(T element){
 			var elements = new List<T>();
-			T gen = _group[index];
-			elements.Add(gen);
+			elements.Add(element);
 			elements.AddRange(_elements);
 			bool changed;
-			do {
+			do{
 				var snapshot = elements.ToArray();
 				changed = snapshot
 					.Aggregate(false, (current1, left) => snapshot.Select(right => left * right)
 						.Aggregate(current1, (current, res) => current | elements.AddIfNotContained(res))
 						);
 			} while(changed);
-			return _group.BuildSubgroup(elements);
+			return elements;
 		}
 	}
 }

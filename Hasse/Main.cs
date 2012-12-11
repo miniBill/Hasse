@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Hasse.Groups;
 using Light = Hasse.Groups.Light;
 using Heavy = Hasse.Groups.Heavy;
+using Hasse.Groups.Heavy.Permutation;
 
 namespace Hasse {
 	static class Program {
@@ -11,17 +12,36 @@ namespace Hasse {
 			Work(args);
 		}
 
-		private static void Work(string[] args) {
-			if(args.Length < 2) {
-				Console.Error.WriteLine("Ohnoes, needz moar argumentz!");
+		private static void Work(string[] args){
+			if(args.Length < 2){
+				/*Console.Error.WriteLine("Ohnoes, needz moar argumentz!");*/
+				//Don't worry
+				BeHappy();
 				return;
 			}
-			uint size = Convert.ToUInt32(args[1]);
-			if(args[0] == "z" || args[0] == "Z")
+			uint size = Convert.ToUInt32(args [1]);
+			if(args [0] == "z" || args [0] == "Z")
 				WorkLight(size, args);
-			if(args[0] == "s" || args[0] == "S")
+			if(args [0] == "s" || args [0] == "S")
 				WorkHeavy(size, args);
-			Console.ReadKey();
+		}
+
+		private static readonly string[] conj = new string[]{
+			"id = <()>", "<(1 3)>", "S_3 = <(1 2), (1 2 3)>",
+			"<(1 2), (3 4)>", "Z_4 = <(1 2 3 4)>",
+			"<(1 2)(3 4)>", "V = <(1 2)(3 4), (1 4)(2 3)>",
+			"Z_3 = <(1 2 3)>", "D_8 = <(1 2 3 4),(2 4)",
+			"A_4 = <()>", "S_4 = <(1 2),(1 3),(1 4),(2 3),(2 4),(3 4)>"
+		};
+
+		/// <summary>
+		/// Don't worry
+		/// </summary>
+		private static void BeHappy(){
+			var s4 = new SymmetricGroup(4);
+			var represent /* CUBA! */ = conj.Select(rep => s4.ParseSubGroup(rep));
+			foreach(var subgroup in represent)
+				Console.WriteLine(subgroup);
 		}
 
 		private static void WorkLight(uint size, IList<string> args) {
