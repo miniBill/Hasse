@@ -59,7 +59,7 @@ namespace Hasse.Groups.Heavy.Product {
 		}
 
 		public override GroupElement<PowerElement<T>> Inverse(){
-			T[] toret = new T[Elements.Length];
+			var toret = new T[Elements.Length];
 			for(int i = 0; i < toret.Length; i++)
 				toret[i] = Elements[i].Inverse().Explode();
 			return new PowerElement<T>(toret);

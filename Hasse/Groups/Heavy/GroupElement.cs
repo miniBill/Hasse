@@ -6,7 +6,7 @@ namespace Hasse.Groups.Heavy {
 			return (T)this; //TODO: Fix
 		}
 
-		public GroupElement<T> Implode(){
+		private GroupElement<T> Implode(){
 			return this;
 		}
 

@@ -5,11 +5,13 @@ using System.Text;
 
 namespace Hasse.Groups.Heavy {
 	public class SubGroup<T> : ISubGroup<SubGroup<T>>, IContainer<SubGroup<T>> where T : GroupElement<T> {
-		public override int GetHashCode(){
-			unchecked{
-			return ((_elements != null ? _elements.GetHashCode() : 0) * 397) ^ (Group != null ? Group.GetHashCode() : 0);}}
+		public override int GetHashCode() {
+			unchecked {
+				return ((_elements != null ? _elements.GetHashCode() : 0) * 397) ^ (Group != null ? Group.GetHashCode() : 0);
+			}
+		}
 
-		protected Group<T> Group{
+		protected Group<T> Group {
 			get;
 			private set;
 		}
@@ -95,44 +97,77 @@ namespace Hasse.Groups.Heavy {
 			return left.Compare(right);
 		}
 
-		public SubGroup<T> Generate(uint index){
+		public SubGroup<T> Generate(uint index) {
 			T gen = Group[index];
 			return Generate(gen);
 		}
 
-		public SubGroup<T> Generate(T element){
+		private SubGroup<T> Generate(T element) {
 			var elements = GenerateElements(element);
 			return Group.BuildSubgroup(elements);
 		}
 
-		public static SubGroup<T> operator ^(SubGroup<T> subgroup, T element){
-			T[] toret = new T[subgroup.Order];
+		public static SubGroup<T> operator ^(SubGroup<T> subgroup, T element) {
+			var toret = new T[subgroup.Order];
 			for(int i = 0; i < toret.Length; i++)
 				toret[i] = subgroup._elements[i] ^ element;
-			return new Hasse.Groups.Heavy.SubGroup<T>(subgroup.Group, toret);
+			return new SubGroup<T>(subgroup.Group, toret);
 		}
 
-		public string FindGeneratorString(){
-			for(int i = 1;; i++){
+		public string FindGeneratorString() {
+			for(int i = 1; ; i++) {
 				var indexes = new uint[i];
-				for(int j=0; j<Order; j++)
-					return ToString();
+				do {
+					if(!Acceptable(indexes))
+						continue;
+					var generators = new List<T>();
+					generators.AddRange(indexes.Select(index => _elements[index]));
+					var gencopy = generators.ToList();
+					var generated = GenerateFromGenerators(generators);
+					if(Equal(generated))
+						return new SubGroup<T>(Group, gencopy).ToString();
+				} while(Increment(indexes, Order));
 			}
 		}
 
-		protected List<T> GenerateElements(T element){
+		private bool Equal(ICollection<T> generated) {
+			return _elements.Count() == generated.Count && generated.All(_elements.Contains);
+		}
+
+		private static bool Acceptable(IEnumerable<uint> indexes) {
+			var sorted = indexes.OrderBy(a => a).ToArray();
+			for(int i = 1; i < sorted.Length; i++)
+				if(sorted[i - 1] == sorted[i])
+					return false;
+			return true;
+		}
+
+		public static bool Increment(uint[] indexes, uint order) {
+			for(int i = 0; i < indexes.Length; i++)
+				if(++indexes[i] != order)
+					return true;
+				else
+					indexes[i] = 0;
+			return false;
+		}
+
+		protected List<T> GenerateElements(T element) {
 			var elements = new List<T>();
 			elements.AddRange(_elements);
 			elements.AddIfNotContained(element);
-			bool changed;
-			do{
+			return GenerateFromGenerators(elements);
+		}
+
+		private static List<T> GenerateFromGenerators(List<T> elements) {
+			for(; ; ) {
 				var snapshot = elements.ToArray();
-				changed = snapshot
-					.Aggregate(false, (current1, left) => snapshot.Select(right => left * right)
-						.Aggregate(current1, (current, res) => current | elements.AddIfNotContained(res))
-						);
-			} while(changed);
-			return elements;
+				var products = from left in snapshot
+							   from right in snapshot
+							   select left * right;
+				var changed = products.Aggregate(false, (changedYet, product) => changedYet | elements.AddIfNotContained(product));
+				if(!changed)
+					return elements;
+			}
 		}
 	}
 }

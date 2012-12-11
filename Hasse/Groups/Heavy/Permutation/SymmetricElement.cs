@@ -109,7 +109,7 @@ namespace Hasse.Groups.Heavy.Permutation {
 		}
 
 		public override GroupElement<SymmetricElement> Inverse(){
-			uint[] toret = new uint[Value.Length];
+			var toret = new uint[Value.Length];
 			for(uint i = 0; i < Value.Length; i++)
 				toret[Value[i]] = i;
 			return new SymmetricElement(toret);

@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Groups\Heavy\SubGroupTest.cs" />
     <Compile Include="MyMathTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Groups\Heavy\Permutation\CyclicGroupTest.cs" />
